@@ -7,7 +7,6 @@ export const MovieDetailsContainer = styled.div`
   margin: 0 auto;
   margin-top: 50px;
   font-size: 1.5rem;
-  font-weight: normal;
 `;
 
 export const MovieImgContainer = styled.div`
