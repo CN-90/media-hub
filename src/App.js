@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.scss';
 import MovieCard from './components/movie-card/MovieCard.Component';
 import MovieInfo from './components/movie-info/MovieInfo.component';
@@ -9,9 +9,6 @@ import { Switch, Route } from 'react-router-dom';
 import Homepage from './pages/home/Home.component';
 
 function App() {
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  useEffect(() => {}, []);
   return (
     <div className="App">
       <Sidebar />

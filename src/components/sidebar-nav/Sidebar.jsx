@@ -15,7 +15,7 @@ const Sidebar = () => {
             activeClassName="active"
             to={{
               pathname: '/movies/NowPlaying',
-              state: { searchLink: 'Now Playing' }
+              state: { title: 'Now Playing', apiCall: 'now_playing' }
             }}
           >
             <li>Now Playing</li>
@@ -24,7 +24,7 @@ const Sidebar = () => {
             activeClassName="active"
             to={{
               pathname: '/movies/Popular',
-              state: { searchLink: 'Popular' }
+              state: { title: 'Popular', apiCall: 'popular' }
             }}
           >
             <li>Popular</li>
@@ -33,7 +33,7 @@ const Sidebar = () => {
             activeClassName="active"
             to={{
               pathname: '/movies/Upcoming',
-              state: { searchLink: 'Upcoming' }
+              state: { title: 'Upcoming', apiCall: 'upcoming' }
             }}
           >
             <li>Upcoming</li>
@@ -42,7 +42,7 @@ const Sidebar = () => {
             activeClassName="active"
             to={{
               pathname: '/movies/TopRated',
-              state: { searchLink: 'Top Rated' }
+              state: { title: 'Top Rated' }
             }}
           >
             <li>Top Rated</li>

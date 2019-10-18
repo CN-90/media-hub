@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { styled } from 'styled-components';
 
-const Movie = () => (
-  <div>
-    <h1>Movie Page</h1>
-  </div>
-);
+const Movie = () => {
+  useEffect(() => {}, []);
+  return (
+    <div>
+      <h1>Movie Page</h1>
+    </div>
+  );
+};
 
 export default Movie;
