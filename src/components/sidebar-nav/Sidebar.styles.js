@@ -2,9 +2,10 @@ import styled from 'styled-components';
 
 export const Navbar = styled.div`
   background-color: #232323;
-  height: 100vh;
-  text-align: center;
+  height: 100%;
+  position: fixed;
   color: #959595;
+  padding: 20px;
   p {
     margin-top: 50px;
     text-align: left;
@@ -12,7 +13,7 @@ export const Navbar = styled.div`
 `;
 
 export const Brand = styled.h1`
-  font-size: 2.5rem;
+  font-size: 2.5em;
   text-align: center;
   font-family: 'Permanent Marker', cursive;
   color: white;
@@ -20,7 +21,7 @@ export const Brand = styled.h1`
 `;
 
 export const TextContainer = styled.div`
-  width: 59%;
+  width: 100%;
   margin: 0 auto;
   li {
     list-style-type: none;
@@ -35,12 +36,5 @@ export const TextContainer = styled.div`
   .active {
     color: white;
     text-decoration: none;
-  }
-
-  a {
-    color: #959595;
-    text-decoration: none;
-    padding: 0;
-    margin: 0;
   }
 `;

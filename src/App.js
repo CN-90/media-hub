@@ -1,18 +1,20 @@
 import React from 'react';
 import './App.scss';
-import MovieCard from './components/movie-card/MovieCard.Component';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import MovieInfo from './components/movie-info/MovieInfo.component';
 import SearchBar from './components/search-bar/SearchBar.component';
-import Axios from 'axios';
 import Sidebar from './components/sidebar-nav/Sidebar';
-import { Switch, Route } from 'react-router-dom';
 import Homepage from './pages/home/Home.component';
+import Movie from './pages/movie/movie';
 
 function App() {
   return (
     <div className="App">
       <Sidebar />
+      <SearchBar />
       <Switch>
+        <Redirect from="/movies/movie/:id" to="/movie/:id" />
+        <Route exact path="/movie/:id" component={Movie} />
         <Route
           exact
           path="/movies/(Popular|Upcoming|TopRated|NowPlaying)/"

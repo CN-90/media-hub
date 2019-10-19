@@ -10,19 +10,26 @@ html {
 
 body {
   background: #1d1d1d;
+  font-family: 'Montserrat';
 }
 
 h1 {
-  font-size: 5em;
-}
-
-.App {
-  display: grid;
-  grid-template-columns: 1fr 8fr;
+  font-size: 3em;
 }
 
 p {
   font-size: 1.7rem;
+}
+
+a {
+  color: #959595;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+
+.app {
+  display: flex;
 }
 
 /* colors */

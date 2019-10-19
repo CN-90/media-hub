@@ -6,7 +6,7 @@ const Sidebar = () => {
   return (
     <Navbar>
       <Brand>
-        <span className="yellow">MEDIA</span> HUB
+        <span className="yellow">MOVIE</span> HUB
       </Brand>
       <TextContainer>
         <p className="yellow">Movies</p>
@@ -24,7 +24,7 @@ const Sidebar = () => {
             activeClassName="active"
             to={{
               pathname: '/movies/Popular',
-              state: { title: 'Popular', apiCall: 'popular' }
+              state: { title: 'Popular Movies', apiCall: 'popular' }
             }}
           >
             <li>Popular</li>
@@ -33,7 +33,7 @@ const Sidebar = () => {
             activeClassName="active"
             to={{
               pathname: '/movies/Upcoming',
-              state: { title: 'Upcoming', apiCall: 'upcoming' }
+              state: { title: 'Upcoming Movies', apiCall: 'upcoming' }
             }}
           >
             <li>Upcoming</li>

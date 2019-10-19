@@ -1,18 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { Home } from './Home.styles';
+import { MovieContainer, Home } from './Home.styles';
 import Axios from 'axios';
 import MovieCard from './../../components/movie-card/MovieCard.Component';
+import SearchBar from './../../components/search-bar/SearchBar.component';
 
 const Homepage = props => {
   const { title, apiCall } = props.location.state;
   const [movies, setMovies] = useState([]);
+  const [pageNumber, setPageNumber] = useState([]);
   console.log(apiCall);
-  useEffect(() => {}, [title]);
+  useEffect(() => {}, [apiCall]);
   return (
     <Home>
-      {movies.map(movie => {
-        return <MovieCard title={movie.title} image={movie.poster_path} />;
-      })}
+      <h1
+        style={{ color: '#ffffff', fontWeight: 'normal', paddingBottom: '4%' }}
+      >
+        {title}
+      </h1>
+      <MovieContainer>
+        {movies.map(movie => {
+          return (
+            <MovieCard
+              key={movie.id}
+              title={movie.title}
+              image={movie.poster_path}
+              score={movie.vote_average}
+              id={movie.id}
+            />
+          );
+        })}
+      </MovieContainer>
     </Home>
   );
 };

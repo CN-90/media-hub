@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 export const SearchBarContainer = styled.div`
-  margin: 0 auto;
-  width: 25%;
   display: grid;
-  grid-template-columns: 6fr 1fr;
+  grid-template-columns: 15fr 1fr;
+  position: fixed;
+  width: calc(100% - 187px);
+  margin-left: 187px;
 
   button {
     height: 100%;
@@ -12,7 +13,6 @@ export const SearchBarContainer = styled.div`
     border: none;
     color: white;
     padding: 15px;
-    border-radius: 0px 5px 5px 0px;
   }
 `;
 
