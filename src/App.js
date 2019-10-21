@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.scss';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import MovieInfo from './components/movie-info/MovieInfo.component';
 import SearchBar from './components/search-bar/SearchBar.component';
 import Sidebar from './components/sidebar-nav/Sidebar';
 import Homepage from './pages/home/Home.component';

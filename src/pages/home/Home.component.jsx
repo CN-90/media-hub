@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { MovieContainer, Home } from './Home.styles';
 import Axios from 'axios';
 import MovieCard from './../../components/movie-card/MovieCard.Component';
-import SearchBar from './../../components/search-bar/SearchBar.component';
+import { MoviesContainer, Home, MovieTitle } from './Home.styles';
 
 const Homepage = props => {
   const { title, apiCall } = props.location.state;
@@ -12,12 +11,8 @@ const Homepage = props => {
   useEffect(() => {}, [apiCall]);
   return (
     <Home>
-      <h1
-        style={{ color: '#ffffff', fontWeight: 'normal', paddingBottom: '4%' }}
-      >
-        {title}
-      </h1>
-      <MovieContainer>
+      <MovieTitle>{title}</MovieTitle>
+      <MoviesContainer>
         {movies.map(movie => {
           return (
             <MovieCard
@@ -29,7 +24,7 @@ const Homepage = props => {
             />
           );
         })}
-      </MovieContainer>
+      </MoviesContainer>
     </Home>
   );
 };

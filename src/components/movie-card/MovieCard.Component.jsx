@@ -27,7 +27,7 @@ const MovieCard = ({ image, title, id, score }) => {
           style={{
             color: '#E2E2E2',
             fontWeight: 'normal',
-            background: '#0866ff',
+            background: '#196aef',
             padding: '5px'
           }}
         >
