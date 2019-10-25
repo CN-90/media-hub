@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-export const Home = styled.div`
+export const MoviesPage = styled.div`
   margin-left: 187px;
   padding-top: 125px;
 `;
 
-export const MovieTitle = styled.h1`
+export const MovieCategory = styled.h1`
   color: #ffffff;
   font-weight: normal;
   padding-bottom: 4%;

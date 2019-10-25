@@ -9,7 +9,8 @@ html {
 }
 
 body {
-  background: #1d1d1d;
+  // background: #1d1d1d;
+  background: #141414;
   font-family: 'Montserrat';
 }
 
@@ -44,4 +45,13 @@ a {
 
 .gray {
   color: #7a7a7a;
+}
+
+@keyframes animate {
+  0% {
+    background-position: -450%;
+  }
+  100% {
+    background-position: 450%;
+  }
 }

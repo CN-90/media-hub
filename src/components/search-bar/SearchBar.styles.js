@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const SearchBarContainer = styled.div`
+export const SearchBarContainer = styled.div``;
+
+export const Form = styled.form`
   display: grid;
   grid-template-columns: 15fr 1fr;
   position: fixed;
@@ -20,5 +22,9 @@ export const SearchInput = styled.input`
   background: #363636;
   border: none;
   padding: 15px;
-  color: #707070;
+  color: #b7b7b7;
+
+  :focus {
+    outline: none;
+  }
 `;
