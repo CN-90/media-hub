@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const MoviesPage = styled.div`
-  margin-left: 187px;
   padding-top: 125px;
 `;
 

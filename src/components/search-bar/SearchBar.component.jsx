@@ -12,7 +12,7 @@ const SearchBar = props => {
     event.preventDefault();
     setMovieSearch('');
     props.history.push({
-      pathname: '/movies/Search',
+      pathname: '/movies/Search/1',
       state: {
         searchTerm: searchedMovie
       }

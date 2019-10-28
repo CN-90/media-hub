@@ -1,5 +1,9 @@
 import React from 'react';
-import { MovieDetailsContainer, MovieImg } from './Movie-details.styles';
+import {
+  MovieDetailsContainer,
+  MovieImg,
+  MovieSummary
+} from './Movie-details.styles';
 
 const MovieDetails = ({
   title,
@@ -38,7 +42,7 @@ const MovieDetails = ({
         <h3 className="white" style={{ fontWeight: 'normal' }}>
           {directorName.length ? directorName[0].name : 'N/A'}
         </h3>
-        <p style={{ marginTop: '25px', color: '#8e8e8e' }}>{summary}</p>
+        <MovieSummary>{summary}</MovieSummary>
       </div>
     </MovieDetailsContainer>
   );

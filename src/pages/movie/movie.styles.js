@@ -1,25 +1,30 @@
 import styled from 'styled-components';
 
 export const MovieInfoContainer = styled.div`
-  height: 100%;
-  margin-left: 187px;
+  height: auto;
 `;
 
 export const MovieBackDrop = styled.div`
   background: ${props => props.url};
   height: 700px;
-  width: 100%;
+  width: calc(100% - 187px);
   position: absolute;
   top: 45px;
   left: 187px;
   background-size: cover;
   background-position: top;
-`;
+  z-index: -1;
 
-export const MovieBackDropOverlay = styled.div`
-  background: #0e0e0e;
-  height: 100%;
-  width: 100%;
-  zindex: -1;
-  opacity: 0.9;
+  ::before {
+    content: '';
+    background: #0e0e0e;
+    position: absolute;
+    display: block;
+    height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    background-color: rgba(5, 5, 5, 0.8);
+  }
 `;

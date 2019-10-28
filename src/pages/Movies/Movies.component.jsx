@@ -3,13 +3,17 @@ import Axios from 'axios';
 import MovieCard from '../../components/movie-card/MovieCard.Component';
 import { MoviesContainer, MoviesPage, MovieCategory } from './Movies.styles';
 import Loading from '../../components/loader/Loading.component';
+import Pagination from './../../components/pagination/Pagination.component';
+import apiKey from './../../config/key';
 
 const Movies = props => {
   const [movies, setMovies] = useState(null);
-  const location = props.location.pathname
-    ? props.location.pathname.split('/')[2].toLowerCase()
-    : '';
-  let searchTerm = location === 'search' ? props.location.state.searchTerm : '';
+  const location = props.location.pathname.split('/')[2].toLowerCase();
+
+  let searchTerm = props.location.state
+    ? props.location.state.searchTerm
+    : 'Harry Potter';
+  const pageNumber = props.match.params.pageNumber;
   const titles = {
     top_rated: 'Top Rated',
     upcoming: 'Upcoming Movies',
@@ -18,7 +22,24 @@ const Movies = props => {
     search: 'Search Movie Database'
   };
 
-  useEffect(() => {}, [location, searchTerm]);
+  useEffect(() => {
+    let link = '';
+    const getMovies = async () => {
+      if (location === 'search') {
+        link = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchTerm}&page=${pageNumber}&include_adult=false`;
+      } else {
+        link = `https://api.themoviedb.org/3/movie/${location}?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
+      }
+
+      await Axios.get(link).then(movies => {
+        const filterMovies = movies.data.results.filter(
+          movie => movie.poster_path !== null
+        );
+        setMovies(filterMovies);
+      });
+    };
+    getMovies();
+  }, [location, pageNumber, searchTerm]);
 
   return movies ? (
     <MoviesPage>
@@ -36,6 +57,7 @@ const Movies = props => {
           );
         })}
       </MoviesContainer>
+      <Pagination />
     </MoviesPage>
   ) : (
     <Loading />

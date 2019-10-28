@@ -11,25 +11,18 @@ const Sidebar = () => {
       <TextContainer>
         <p className="yellow">Movies</p>
         <ul>
-          <NavLink activeClassName="active" to={'/movies/now_playing'}>
+          <NavLink activeClassName="active" to={'/movies/now_playing/1'}>
             <li>Now Playing</li>
           </NavLink>
-          <NavLink activeClassName="active" to={'/movies/popular'}>
+          <NavLink activeClassName="active" to={'/movies/popular/1'}>
             <li>Popular</li>
           </NavLink>
-          <NavLink activeClassName="active" to={'/movies/upcoming'}>
+          <NavLink activeClassName="active" to={'/movies/upcoming/1'}>
             <li>Upcoming</li>
           </NavLink>
-          <NavLink activeClassName="active" to={'/movies/top_rated'}>
+          <NavLink activeClassName="active" to={'/movies/top_rated/1'}>
             <li>Top Rated</li>
           </NavLink>
-        </ul>
-        <p>Television</p>
-        <ul>
-          <li>On air</li>
-          <li>Popular</li>
-          <li>Upcoming</li>
-          <li>Top Rated</li>
         </ul>
       </TextContainer>
     </Navbar>

@@ -17,3 +17,8 @@ export const MovieImg = styled.div`
 export const MovieTitle = styled.h1`
   padding-bottom: 5px;
 `;
+
+export const MovieSummary = styled.p`
+  margin-top: 25px;
+  color: #8e8e8e;
+`;
