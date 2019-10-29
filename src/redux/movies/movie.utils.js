@@ -1,16 +1,27 @@
 import Axios from 'axios';
 import apiKey from './../../config/key';
 
-const getMovies = async id => {
-  let movieInfo = await Axios.get(
+//Fetch movie details and crew details about specific movie.
+export const fetchMovieAsync = async id => {
+  let movieInfo = Axios.get(
     `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`
-  ).then(movie => movie.data);
-  let movieCredits = await Axios.get(
-    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}
-  `
-  ).then(credit => credit);
+  );
+  let movieCredits = Axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`
+  );
 
-  return { movieInfo, movieCredits };
+  return await Promise.all([movieInfo, movieCredits]);
 };
 
-export { getMovies };
+//Fetch all movies under a specific category - e.g Upcoming movies, popular movies, etc...
+export const fetchMoviesAsync = async (category, pageNumber) => {
+  return await Axios.get(
+    `https://api.themoviedb.org/3/movie/${category}?api_key=${apiKey}&language=en-US&page=${pageNumber}`
+  );
+};
+
+export const fetchMoviesSearchAsync = async (searchTerm, pageNumber) => {
+  return await Axios.get(
+    `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchTerm}&page=${pageNumber}&include_adult=false`
+  );
+};

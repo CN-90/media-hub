@@ -1,19 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 const Card = styled.div`
   height: 350px;
   width: 200px;
   text-align: center;
   padding-bottom: 50px;
+
+  div {
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+  }
 `;
 
-const MovieCard = ({ image, title, id, score }) => {
-  console.log(id);
+const MovieCard = ({ history, image, title, id, score }) => {
   return (
     <Card>
-      <Link to={`movie/${id}`}>
+      <div onClick={() => history.push(`/movie/${id}`)}>
         <img
           style={{
             height: '90%',
@@ -33,9 +38,9 @@ const MovieCard = ({ image, title, id, score }) => {
         >
           {title}
         </h2>
-      </Link>
+      </div>
     </Card>
   );
 };
 
-export default MovieCard;
+export default withRouter(MovieCard);

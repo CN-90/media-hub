@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import MovieDetails from '../../components/movie-info/Movie-details.component';
+import MovieDetails from '../../components/movie-details/Movie-details.component';
 import { useParams } from 'react-router-dom';
 import Axios from 'axios';
 import { MovieInfoContainer, MovieBackDrop } from './Movie.styles';

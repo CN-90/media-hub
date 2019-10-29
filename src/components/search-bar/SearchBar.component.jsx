@@ -3,7 +3,7 @@ import { SearchInput, Form } from './SearchBar.styles';
 import { withRouter } from 'react-router-dom';
 
 const SearchBar = props => {
-  console.log(props);
+  // console.log(props);
   const [searchedMovie, setMovieSearch] = useState('');
 
   useEffect(() => {}, []);
@@ -12,7 +12,7 @@ const SearchBar = props => {
     event.preventDefault();
     setMovieSearch('');
     props.history.push({
-      pathname: '/movies/Search/1',
+      pathname: `/movies/search/${searchedMovie}/1`,
       state: {
         searchTerm: searchedMovie
       }

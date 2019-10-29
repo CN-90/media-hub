@@ -5,32 +5,29 @@ import { MoviesContainer, MoviesPage, MovieCategory } from './Movies.styles';
 import Loading from '../../components/loader/Loading.component';
 import Pagination from './../../components/pagination/Pagination.component';
 import apiKey from './../../config/key';
+import { connect } from 'react-redux';
+import { fetchMoviesByCategory } from '../../redux/movies/movie.actions';
+import { getPageTitle } from './../../utils/utils';
 
 const Movies = props => {
   const [movies, setMovies] = useState(null);
-  const location = props.location.pathname.split('/')[2].toLowerCase();
+  const category = props.location.pathname.split('/')[2].toLowerCase();
 
   let searchTerm = props.location.state
     ? props.location.state.searchTerm
-    : 'Harry Potter';
+    : null;
   const pageNumber = props.match.params.pageNumber;
-  const titles = {
-    top_rated: 'Top Rated',
-    upcoming: 'Upcoming Movies',
-    popular: 'Popular Movies',
-    now_playing: 'Now Playing',
-    search: 'Search Movie Database'
-  };
-
+  // const { movies, isFetching } = props.movies;
   useEffect(() => {
+    // props.getMoviez(category, 1);
+    // console.log(movies);
     let link = '';
     const getMovies = async () => {
-      if (location === 'search') {
+      if (category === 'search') {
         link = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchTerm}&page=${pageNumber}&include_adult=false`;
       } else {
-        link = `https://api.themoviedb.org/3/movie/${location}?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
+        link = `https://api.themoviedb.org/3/movie/${category}?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
       }
-
       await Axios.get(link).then(movies => {
         const filterMovies = movies.data.results.filter(
           movie => movie.poster_path !== null
@@ -39,11 +36,11 @@ const Movies = props => {
       });
     };
     getMovies();
-  }, [location, pageNumber, searchTerm]);
+  }, [category, pageNumber, searchTerm]);
 
   return movies ? (
     <MoviesPage>
-      <MovieCategory>{titles[location]}</MovieCategory>
+      <MovieCategory>{getPageTitle(category, searchTerm)}</MovieCategory>
       <MoviesContainer>
         {movies.map(movie => {
           return (
@@ -64,4 +61,15 @@ const Movies = props => {
   );
 };
 
-export default Movies;
+const mapStateToProps = state => ({
+  movies: state.movie
+});
+
+const mapDispatchToProps = dispatch => {
+  return { getMoviez: id => dispatch(fetchMoviesByCategory(id)) };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Movies);

@@ -23,6 +23,9 @@ const Sidebar = () => {
           <NavLink activeClassName="active" to={'/movies/top_rated/1'}>
             <li>Top Rated</li>
           </NavLink>
+          <NavLink activeClassName="active" to={'/movies/search/'}>
+            <li>Search</li>
+          </NavLink>
         </ul>
       </TextContainer>
     </Navbar>
