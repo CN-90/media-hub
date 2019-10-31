@@ -5,10 +5,13 @@ import {
   fetchMoviesSearchAsync
 } from './movie.utils';
 
+// Fetches a single movie based on movies ID
 export const fetchMovie = id => {
   return async dispatch => {
+    dispatch(clearMovies());
     dispatch(fetchMoviesStart());
-    await fetchMovieAsync(417384)
+
+    await fetchMovieAsync(id)
       .then(movieData => {
         let movieObj = {
           movieInfo: movieData[0].data,
@@ -17,25 +20,35 @@ export const fetchMovie = id => {
         dispatch(fetchMovieSuccess(movieObj));
       })
       .catch(err => dispatch(fetchMoviesFailure(err.message)));
+
     dispatch(fetchMoviesFinish());
   };
 };
 
+// Fetches a movie by category, e.g popular, upcoming, top rated, etc..
 export const fetchMoviesByCategory = (category, pageNumber) => {
   return async dispatch => {
+    dispatch(clearMovies());
     dispatch(fetchMoviesStart());
     await fetchMoviesAsync(category, pageNumber)
       .then(movieData => {
-        dispatch(fetchMoviesSuccess(movieData.data));
+        dispatch(fetchMoviesSuccess(movieData.data.results));
       })
       .catch(err => dispatch(fetchMoviesFailure(err.message)));
     dispatch(fetchMoviesFinish());
   };
 };
 
-export const fetchMovieSearch = searchTerm => {
-  return dispatch => {
+// Fetches movies based on users search
+export const fetchMovieSearch = (searchTerm, pageNumber) => {
+  return async dispatch => {
     dispatch(fetchMoviesStart());
+    await fetchMoviesSearchAsync(searchTerm, pageNumber)
+      .then(movieData => {
+        dispatch(fetchMoviesSuccess(movieData.data.results));
+      })
+      .catch(err => dispatch(fetchMoviesFailure(err.message)));
+    dispatch(fetchMoviesFinish());
   };
 };
 
@@ -60,4 +73,8 @@ export const fetchMovieSuccess = movie => ({
 export const fetchMoviesFailure = error => ({
   type: movieActionTypes.FETCH_MOVIES_FAIL,
   payload: error
+});
+
+export const clearMovies = () => ({
+  type: movieActionTypes.CLEAR_MOVIES
 });

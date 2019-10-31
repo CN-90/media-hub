@@ -5,10 +5,14 @@ import SearchBar from './components/search-bar/SearchBar.component';
 import Sidebar from './components/sidebar/Sidebar';
 import Movies from './pages/Movies/Movies.component';
 import Movie from './pages/movie/Movie';
-import Pagination from './components/pagination/Pagination.component';
-import { fetchMovieAsync, fetchMoviesAsync } from './redux/movies/movie.utils';
 
-const ErrorPage = () => <Pagination pageNumber={1} />;
+const ErrorPage = () => (
+  <div>
+    <h1 style={{ marginnTop: '200px', marginleft: '200px' }}>
+      Page not found dawg
+    </h1>
+  </div>
+);
 
 function App() {
   return (

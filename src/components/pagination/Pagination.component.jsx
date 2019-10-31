@@ -1,44 +1,53 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PagintationButton, PaginationContainer } from './Pagination.styles';
+import { withRouter } from 'react-router-dom';
 
-const Pagination = ({ lastPage }) => {
-  let [pageNumber, setPageNumber] = useState(1);
-  console.log(pageNumber);
+const Pagination = ({ history, pageNumber, category }) => {
+  const parsedNum = parseInt(pageNumber);
+  const pageMinusOne = parsedNum - 1;
+  const pagePlusOne = parsedNum + 1;
 
   const nextPage = () => {
-    let newPage = pageNumber + 1;
-    setPageNumber(newPage);
+    history.push({
+      pathname: `/movies/${category}/${parsedNum + 1}`
+    });
   };
 
   const previousPage = () => {
-    let newPage = pageNumber - 1;
-    setPageNumber(newPage);
+    if (parsedNum === 1) return;
+    history.push({
+      pathname: `/movies/${category}/${parsedNum - 1}`
+    });
   };
 
-  const setPage = page => {
-    setPageNumber(page);
+  const setPage = pageNum => {
+    history.push({
+      pathname: `/movies/${category}/${pageNum}`
+    });
   };
 
   return (
-    <PaginationContainer>
-      <PagintationButton disabled={pageNumber === 1} onClick={previousPage}>
+    <PaginationContainer pageNumber={pageNumber}>
+      <PagintationButton disabled={parsedNum === 1} onClick={previousPage}>
         Previous
       </PagintationButton>
       <PagintationButton
-        hidden={pageNumber <= 1}
-        onClick={() => setPage(pageNumber - 1)}
+        onClick={() => setPage(pageMinusOne)}
+        hidden={parsedNum <= 1}
       >
-        {pageNumber - 1}
+        {pageMinusOne}
       </PagintationButton>
       <PagintationButton active onClick={previousPage}>
-        {pageNumber}
+        {parsedNum}
       </PagintationButton>
-      <PagintationButton onClick={() => setPage(pageNumber + 1)}>
-        {pageNumber + 1}
+      <PagintationButton onClick={() => setPage(pagePlusOne)}>
+        {pagePlusOne}
       </PagintationButton>
-      <PagintationButton onClick={nextPage}>Next</PagintationButton>
+      <PagintationButton onClick={() => nextPage(parsedNum)}>
+        Next
+      </PagintationButton>
     </PaginationContainer>
   );
 };
 
-export default Pagination;
+export default withRouter(Pagination);

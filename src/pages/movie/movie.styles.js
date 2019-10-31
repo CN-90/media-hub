@@ -25,6 +25,6 @@ export const MovieBackDrop = styled.div`
     left: 0;
     width: 100%;
     z-index: 2;
-    background-color: rgba(5, 5, 5, 0.92);
+    background-color: rgba(5, 5, 5, 0.8);
   }
 `;

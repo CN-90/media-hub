@@ -1,34 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import MovieDetails from '../../components/movie-details/Movie-details.component';
 import { useParams } from 'react-router-dom';
-import Axios from 'axios';
 import { MovieInfoContainer, MovieBackDrop } from './Movie.styles';
 import Loading from '../../components/loader/Loading.component';
-import apiKey from './../../config/key';
+import { connect } from 'react-redux';
+import { fetchMovie } from './../../redux/movies/movie.actions';
 
-const Movie = () => {
+const Movie = props => {
   const { id } = useParams();
-  const [movie, setMovie] = useState({ movieInfo: null, movieCredits: null });
+  const { isFetching, movie, fetchMovie } = props;
 
   useEffect(() => {
-    const getMovie = async () => {
-      let movieInfo = await Axios.get(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`
-      ).then(movie => movie.data);
-      let movieCredits = await Axios.get(
-        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}
-      `
-      ).then(credit => credit);
+    fetchMovie(id);
+  }, [id, fetchMovie]);
 
-      setMovie({ movieCredits, movieInfo });
-    };
-
-    getMovie();
-  }, [id]);
-
-  console.log(movie);
-
-  return movie.movieInfo ? (
+  return movie.movieInfo && !isFetching ? (
     <MovieInfoContainer>
       <MovieBackDrop
         url={`url("https://image.tmdb.org/t/p/w1280/${movie.movieInfo.backdrop_path}") no-repeat`}
@@ -49,4 +35,16 @@ const Movie = () => {
   );
 };
 
-export default Movie;
+const mapStateToProps = state => ({
+  isFetching: state.movie.isFetching,
+  movie: state.movie.movie
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchMovie: id => dispatch(fetchMovie(id))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Movie);

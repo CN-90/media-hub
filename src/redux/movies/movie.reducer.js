@@ -40,6 +40,12 @@ const movieReducer = (state = INITIAL_STATE, action) => {
         ...state,
         error: action.payload
       };
+
+    case movieActionTypes.CLEAR_MOVIES:
+      return {
+        ...state,
+        movies: []
+      };
     default:
       return state;
   }
