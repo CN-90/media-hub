@@ -8,6 +8,8 @@ export const Form = styled.form`
   position: fixed;
   width: calc(100% - 187px);
   margin-left: 187px;
+  z-index: 2;
+  top: 0;
 
   button {
     height: 100%;
@@ -15,6 +17,11 @@ export const Form = styled.form`
     border: none;
     color: white;
     padding: 15px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    margin-left: 0px;
   }
 `;
 

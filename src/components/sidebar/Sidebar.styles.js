@@ -10,6 +10,10 @@ export const Navbar = styled.div`
     margin-top: 50px;
     text-align: left;
   }
+
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const Brand = styled.h1`

@@ -13,21 +13,21 @@ const Sidebar = () => {
         <ul>
           <NavLink
             isActive={(match, location) => {
-              if (location.pathname.includes('now_playing')) return true;
-            }}
-            activeClassName="active"
-            to={'/movies/now_playing/1'}
-          >
-            <li>Now Playing</li>
-          </NavLink>
-          <NavLink
-            isActive={(match, location) => {
               if (location.pathname.includes('popular')) return true;
             }}
             activeClassName="active"
             to={'/movies/popular/1'}
           >
             <li>Popular</li>
+          </NavLink>
+          <NavLink
+            isActive={(match, location) => {
+              if (location.pathname.includes('now_playing')) return true;
+            }}
+            activeClassName="active"
+            to={'/movies/now_playing/1'}
+          >
+            <li>Now Playing</li>
           </NavLink>
           <NavLink
             isActive={(match, location) => {

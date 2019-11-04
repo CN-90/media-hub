@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
 export const MovieInfoContainer = styled.div`
-  height: auto;
+  min-height: 100vh;
+  position: relative;
 `;
 
 export const MovieBackDrop = styled.div`
   background: ${props => props.url};
-  height: 700px;
-  width: calc(100% - 187px);
+  height: 100%;
+  width: 100%;
   position: absolute;
   top: 45px;
-  left: 187px;
+  overflow: hidden
   background-size: cover;
   background-position: top;
   z-index: -1;
@@ -25,6 +26,12 @@ export const MovieBackDrop = styled.div`
     left: 0;
     width: 100%;
     z-index: 2;
-    background-color: rgba(5, 5, 5, 0.8);
+    background-color: rgba(0, 0, 0, 0.83);
   }
+
+  @media only screen and (max-width: 768px) {
+    left: 0px;
+    width: 100%;
+  }
+}
 `;

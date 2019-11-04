@@ -2,7 +2,8 @@ import React from 'react';
 import {
   MovieDetailsContainer,
   MovieImg,
-  MovieSummary
+  MovieSummary,
+  MovieInfo
 } from './Movie-details.styles';
 
 const MovieDetails = ({
@@ -29,8 +30,8 @@ const MovieDetails = ({
           style={{ width: '100%', height: '80%' }}
         />
       </MovieImg>
-      <div style={{ paddingLeft: '40px', color: 'white' }}>
-        <h1 style={{ paddingBottom: '7px' }}>
+      <MovieInfo>
+        <h1 style={{ paddingBottom: '3px' }}>
           {title} {yearOfRelease ? `(${yearOfRelease})` : ''}
         </h1>
         <h3
@@ -39,11 +40,11 @@ const MovieDetails = ({
         >
           {movieGenres}
         </h3>
-        <h3 className="white" style={{ fontWeight: 'normal' }}>
+        <h3 style={{ fontWeight: 'normal', color: '#dcdcdc' }}>
           {directorName.length ? directorName[0].name : 'N/A'}
         </h3>
         <MovieSummary>{summary}</MovieSummary>
-      </div>
+      </MovieInfo>
     </MovieDetailsContainer>
   );
 };

@@ -28,7 +28,6 @@ export const fetchMovie = id => {
 // Fetches a movie by category, e.g popular, upcoming, top rated, etc..
 export const fetchMoviesByCategory = (category, pageNumber) => {
   return async dispatch => {
-    dispatch(clearMovies());
     dispatch(fetchMoviesStart());
     await fetchMoviesAsync(category, pageNumber)
       .then(movieData => {

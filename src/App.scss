@@ -7,6 +7,10 @@
 .container {
   height: 100%;
   margin-left: 187px;
+
+  @media only screen and (max-width: 768px) {
+    margin-left: 0px;
+  }
 }
 
 html {
@@ -14,9 +18,9 @@ html {
 }
 
 body {
-  // background: #1d1d1d;
   background: #141414;
   font-family: 'Montserrat';
+  height: 100%;
 }
 
 h1 {
