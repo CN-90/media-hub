@@ -11,7 +11,6 @@ const MovieDetails = ({
   summary,
   genres,
   poster,
-  backdrop,
   crew,
   release_date
 }) => {

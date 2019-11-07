@@ -7,6 +7,7 @@ const Card = styled.div`
   width: 200px;
   text-align: center;
   padding-bottom: 50px;
+  justify-self: center;
 
   div {
     cursor: pointer;

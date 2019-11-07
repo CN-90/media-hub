@@ -9,14 +9,14 @@ const Pagination = ({ history, pageNumber, category }) => {
 
   const nextPage = () => {
     history.push({
-      pathname: `/movies/${category}/${parsedNum + 1}`
+      pathname: `/movies/${category}/${pagePlusOne}`
     });
   };
 
   const previousPage = () => {
     if (parsedNum === 1) return;
     history.push({
-      pathname: `/movies/${category}/${parsedNum - 1}`
+      pathname: `/movies/${category}/${pageMinusOne}`
     });
   };
 

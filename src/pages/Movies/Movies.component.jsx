@@ -4,24 +4,32 @@ import { MoviesContainer, MoviesPage, MovieCategory } from './Movies.styles';
 import Loading from '../../components/loader/Loading.component';
 import Pagination from './../../components/pagination/Pagination.component';
 import { connect } from 'react-redux';
-import { fetchMoviesByCategory } from '../../redux/movies/movie.actions';
+import {
+  fetchMoviesByCategory,
+  fetchMovieSearch
+} from '../../redux/movies/movie.actions';
 import { getPageTitle } from './../../utils/utils';
 
 const Movies = props => {
+  const { movies, isFetching, fetchMovieSearch, getMovies } = props;
   const category = props.location.pathname.split('/')[2].toLowerCase();
 
   let searchTerm = props.location.state
     ? props.location.state.searchTerm
     : null;
   const pageNumber = props.match.params.pageNumber;
-  const { movies, isFetching, getMovies } = props;
+  const title = getPageTitle(category, searchTerm);
   useEffect(() => {
-    getMovies(category, pageNumber);
-  }, [category, getMovies, pageNumber, searchTerm]);
+    if (searchTerm) {
+      fetchMovieSearch(searchTerm, pageNumber);
+    } else {
+      getMovies(category, pageNumber);
+    }
+  }, [category, getMovies, pageNumber, fetchMovieSearch, searchTerm]);
 
   return !isFetching ? (
     <MoviesPage>
-      <MovieCategory>{getPageTitle(category, searchTerm)}</MovieCategory>
+      <MovieCategory>{title}</MovieCategory>
       <MoviesContainer>
         {movies.map(movie => {
           return (
@@ -44,13 +52,15 @@ const Movies = props => {
 
 const mapStateToProps = state => ({
   movies: state.movie.movies,
-  isFetching: state.movie.isFetching
+  isFetching: state.movie.isFetching,
+  movieSearch: state.movie.movieSearch
 });
 
 const mapDispatchToProps = dispatch => {
   return {
     getMovies: (category, pageNum) =>
-      dispatch(fetchMoviesByCategory(category, pageNum))
+      dispatch(fetchMoviesByCategory(category, pageNum)),
+    fetchMovieSearch: searchTerm => dispatch(fetchMovieSearch(searchTerm))
   };
 };
 

@@ -10,6 +10,12 @@ export const MovieCategory = styled.h1`
   padding-bottom: 4%;
   margin-left: 6%;
   font-size: 3.5rem;
+
+  @media only screen and (max-width: 768px) {
+    margin-left: 0;
+    text-align: center;
+    padding-bottom: 8%;
+  }
 `;
 
 export const MoviesContainer = styled.div`

@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   movie: {},
   pageNumber: 1,
   error: null,
+  movieSearch: null,
   isFetching: false
 };
 
@@ -45,6 +46,12 @@ const movieReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         movies: []
+      };
+
+    case movieActionTypes.SET_SEARCH:
+      return {
+        ...state,
+        movieSearch: action.payload
       };
     default:
       return state;

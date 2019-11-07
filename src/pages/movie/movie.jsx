@@ -30,7 +30,7 @@ const Movie = props => {
         genres={movie.movieInfo.genres}
         crew={movie.movieCredits.data}
       />
-      <MovieCast />
+      <MovieCast cast={movie.movieCredits.data} />
     </MovieInfoContainer>
   ) : (
     <Loading />

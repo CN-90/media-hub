@@ -1,16 +1,24 @@
 import React from 'react';
+import Actor from './Actor.component';
+import { MovieCastContainer, ActorsContainer } from './Movie-cast.styles';
 
-const MovieCast = () => {
+const MovieCast = ({ cast: { cast } }) => {
   return (
-    <div
+    <MovieCastContainer
       style={{
         width: '80%',
         margin: '0 auto',
-        paddingTop: '65px'
+        paddingTop: '65px',
+        color: '#ffffff'
       }}
     >
-      <h1 style={{ fontWeight: 'normal', color: '#c3c3c3' }}>Cast</h1>
-    </div>
+      <h1>Cast</h1>
+      <ActorsContainer>
+        {cast.slice(0, 10).map(actor => {
+          return <Actor image={actor.profile_path} name={actor.name} />;
+        })}
+      </ActorsContainer>
+    </MovieCastContainer>
   );
 };
 

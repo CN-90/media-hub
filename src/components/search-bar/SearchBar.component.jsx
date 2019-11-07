@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { SearchInput, Form } from './SearchBar.styles';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setSearchQuery } from '../../redux/movies/movie.actions';
 
 const SearchBar = props => {
-  // console.log(props);
   const [searchedMovie, setMovieSearch] = useState('');
-
-  useEffect(() => {}, []);
 
   const handleSubmit = event => {
     event.preventDefault();
-    setMovieSearch('');
     props.history.push({
       pathname: `/movies/search/${searchedMovie}/1`,
       state: {
         searchTerm: searchedMovie
       }
     });
+    props.searchQuery(searchedMovie);
+    setMovieSearch('');
   };
 
   const handleChange = event => {
@@ -38,4 +38,17 @@ const SearchBar = props => {
   );
 };
 
-export default withRouter(SearchBar);
+const mapStateToProps = state => ({
+  searchTerm: state.movie.movieSearch
+});
+
+const mapDispatchToProps = dispatch => ({
+  searchQuery: searchTerm => dispatch(setSearchQuery(searchTerm))
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SearchBar)
+);
