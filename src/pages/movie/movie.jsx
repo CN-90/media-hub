@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import MovieDetails from '../../components/movie-details/Movie-details.component';
+import MovieDetails from '../../components/movie-details/MovieDetails.component';
 import { useParams } from 'react-router-dom';
 import { MovieInfoContainer, MovieBackDrop } from './Movie.styles';
 import Loading from '../../components/loader/Loading.component';
@@ -46,7 +46,4 @@ const mapDispatchToProps = dispatch => ({
   fetchMovie: id => dispatch(fetchMovie(id))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Movie);
+export default connect(mapStateToProps, mapDispatchToProps)(Movie);

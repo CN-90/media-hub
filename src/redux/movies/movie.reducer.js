@@ -2,7 +2,7 @@ import movieActionTypes from './movie.types';
 // import { getMovies } from './movie.utils';
 
 const INITIAL_STATE = {
-  movies: [],
+  movies: { results: [], totalPages: null },
   movie: {},
   pageNumber: 1,
   error: null,
@@ -45,7 +45,7 @@ const movieReducer = (state = INITIAL_STATE, action) => {
     case movieActionTypes.CLEAR_MOVIES:
       return {
         ...state,
-        movies: []
+        movies: { results: [], totalPages: null }
       };
 
     case movieActionTypes.SET_SEARCH:

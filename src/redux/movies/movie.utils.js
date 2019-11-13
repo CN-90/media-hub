@@ -4,7 +4,7 @@ import apiKey from './../../config/key';
 //Fetch movie details and crew details about specific movie.
 export const fetchMovieAsync = async id => {
   let movieInfo = Axios.get(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US&append_to_response=videos`
   );
   let movieCredits = Axios.get(
     `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`

@@ -5,6 +5,7 @@ import SearchBar from './components/search-bar/SearchBar.component';
 import Sidebar from './components/sidebar/Sidebar';
 import Movies from './pages/Movies/Movies.component';
 import Movie from './pages/movie/Movie';
+import AuthPage from './pages/auth/Auth.component';
 
 const ErrorPage = () => (
   <div>
@@ -21,6 +22,7 @@ function App() {
       <SearchBar />
       <div className="container">
         <Switch>
+          <Route exact path="/(signin|signup)" component={AuthPage} />
           <Route exact path="/movie/:id" component={Movie} />
           <Route
             exact

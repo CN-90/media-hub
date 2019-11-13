@@ -4,7 +4,7 @@ import {
   MovieImg,
   MovieSummary,
   MovieInfo
-} from './Movie-details.styles';
+} from './MovieDetails.styles';
 
 const MovieDetails = ({
   title,

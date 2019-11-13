@@ -18,21 +18,4 @@ const Loading = () => {
   );
 };
 
-// const Loading = WrappedComponent => ({ isLoading, ...otherProps }) => {
-//   return isLoading ? (
-//     <LoaderContainer>
-//       <Loader
-//         type="Bars"
-//         color="#2176ff"
-//         height={100}
-//         width={100}
-//         //3 secs
-//       />
-//       <LoadingText>Loading</LoadingText>
-//     </LoaderContainer>
-//   ) : (
-//     <WrappedComponent {...otherProps} />
-//   );
-// };
-
 export default Loading;

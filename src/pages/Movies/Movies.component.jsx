@@ -13,25 +13,24 @@ import { getPageTitle } from './../../utils/utils';
 const Movies = props => {
   const { movies, isFetching, fetchMovieSearch, getMovies } = props;
   const category = props.location.pathname.split('/')[2].toLowerCase();
+  const { movieName, pageNumber } = props.match.params;
+  const title = getPageTitle(category, movieName);
 
-  let searchTerm = props.location.state
-    ? props.location.state.searchTerm
-    : null;
-  const pageNumber = props.match.params.pageNumber;
-  const title = getPageTitle(category, searchTerm);
   useEffect(() => {
-    if (searchTerm) {
-      fetchMovieSearch(searchTerm, pageNumber);
+    if (movieName) {
+      fetchMovieSearch(movieName, pageNumber);
     } else {
       getMovies(category, pageNumber);
     }
-  }, [category, getMovies, pageNumber, fetchMovieSearch, searchTerm]);
+  }, [category, getMovies, pageNumber, movieName, fetchMovieSearch]);
+
+  const filteredMovies = movies.results.filter(movie => movie.poster_path);
 
   return !isFetching ? (
     <MoviesPage>
       <MovieCategory>{title}</MovieCategory>
       <MoviesContainer>
-        {movies.map(movie => {
+        {filteredMovies.map(movie => {
           return (
             <MovieCard
               key={movie.id}
@@ -43,7 +42,7 @@ const Movies = props => {
           );
         })}
       </MoviesContainer>
-      <Pagination pageNumber={pageNumber} category={category} />
+      <Pagination pageNumber={pageNumber} lastPageNum={movies.totalPages} />
     </MoviesPage>
   ) : (
     <Loading />
@@ -58,9 +57,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    getMovies: (category, pageNum) =>
-      dispatch(fetchMoviesByCategory(category, pageNum)),
-    fetchMovieSearch: searchTerm => dispatch(fetchMovieSearch(searchTerm))
+    getMovies: (category, pageNumber) =>
+      dispatch(fetchMoviesByCategory(category, pageNumber)),
+    fetchMovieSearch: (searchTerm, pageNumber) =>
+      dispatch(fetchMovieSearch(searchTerm, pageNumber))
   };
 };
 

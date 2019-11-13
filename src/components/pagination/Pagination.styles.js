@@ -6,6 +6,7 @@ export const PaginationContainer = styled.ul`
   width: 89%;
   text-align: right;
   padding-bottom: 20px;
+  padding-top: 100px;
   display: ${props => (isNaN(props.pageNumber) ? 'none' : 'block')};
 
   @media only screen and (max-width: 768px) {

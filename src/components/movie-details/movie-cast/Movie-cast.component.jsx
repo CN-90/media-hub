@@ -3,7 +3,7 @@ import Actor from './Actor.component';
 import { MovieCastContainer, ActorsContainer } from './Movie-cast.styles';
 
 const MovieCast = ({ cast: { cast } }) => {
-  return (
+  return cast.length ? (
     <MovieCastContainer
       style={{
         width: '80%',
@@ -19,7 +19,7 @@ const MovieCast = ({ cast: { cast } }) => {
         })}
       </ActorsContainer>
     </MovieCastContainer>
-  );
+  ) : null;
 };
 
 export default MovieCast;

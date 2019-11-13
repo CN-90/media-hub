@@ -7,6 +7,8 @@
 .container {
   height: 100%;
   margin-left: 187px;
+  position: relative;
+  // background: url('./assets/poster_background.jpg');
 
   @media only screen and (max-width: 768px) {
     margin-left: 0px;
@@ -36,10 +38,6 @@ a {
   text-decoration: none;
   padding: 0;
   margin: 0;
-}
-
-.app {
-  display: flex;
 }
 
 /* colors */

@@ -28,10 +28,19 @@ export const fetchMovie = id => {
 // Fetches a movie by category, e.g popular, upcoming, top rated, etc..
 export const fetchMoviesByCategory = (category, pageNumber) => {
   return async dispatch => {
+    console.log('Running running running...');
+    if (category === 'search' && !pageNumber) {
+      dispatch(clearMovies());
+      return;
+    }
     dispatch(fetchMoviesStart());
     await fetchMoviesAsync(category, pageNumber)
       .then(movieData => {
-        dispatch(fetchMoviesSuccess(movieData.data.results));
+        let movieObj = {
+          results: movieData.data.results,
+          totalPages: movieData.data.total_pages
+        };
+        dispatch(fetchMoviesSuccess(movieObj));
       })
       .catch(err => dispatch(fetchMoviesFailure(err.message)));
     dispatch(fetchMoviesFinish());
@@ -44,7 +53,11 @@ export const fetchMovieSearch = (searchTerm, pageNumber) => {
     dispatch(fetchMoviesStart());
     await fetchMoviesSearchAsync(searchTerm, pageNumber)
       .then(movieData => {
-        dispatch(fetchMoviesSuccess(movieData.data.results));
+        let movieObj = {
+          results: movieData.data.results,
+          totalPages: movieData.data.total_pages
+        };
+        dispatch(fetchMoviesSuccess(movieObj));
       })
       .catch(err => dispatch(fetchMoviesFailure(err.message)));
     dispatch(fetchMoviesFinish());

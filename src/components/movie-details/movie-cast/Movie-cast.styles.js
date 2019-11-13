@@ -13,8 +13,13 @@ export const MovieCastContainer = styled.div`
 
 export const ActorsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 0.1fr));
   gap: 3.5rem;
+  justify-content: start;
+
+  @media only screen and (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 // ACTOR CLASSES
