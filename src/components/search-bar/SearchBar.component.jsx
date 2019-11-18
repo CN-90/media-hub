@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { SearchInput, Form } from './SearchBar.styles';
+import { SearchInput, Form, HamburgerMenu } from './SearchBar.styles';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setSearchQuery } from '../../redux/movies/movie.actions';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SearchBar = props => {
   const [searchedMovie, setMovieSearch] = useState('');
@@ -25,6 +27,9 @@ const SearchBar = props => {
 
   return (
     <Form>
+      <HamburgerMenu>
+        <FontAwesomeIcon icon={faBars} color="white" size="2x" />
+      </HamburgerMenu>
       <SearchInput
         value={searchedMovie}
         onChange={handleChange}
@@ -47,8 +52,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(SearchBar)
+  connect(mapStateToProps, mapDispatchToProps)(SearchBar)
 );

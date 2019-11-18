@@ -3,7 +3,7 @@ import { PagintationButton, PaginationContainer } from './Pagination.styles';
 import { withRouter } from 'react-router-dom';
 import parseuri from 'parseuri';
 
-const Pagination = ({ history, pageNumber, lastPageNum }) => {
+const Pagination = ({ history, pageNumber, lastPageNum, isMovies }) => {
   let currentLocation = parseuri(history.location.pathname)
     .pathNames.slice(0, -1)
     .join('/');
@@ -31,7 +31,7 @@ const Pagination = ({ history, pageNumber, lastPageNum }) => {
   };
 
   return (
-    <PaginationContainer pageNumber={pageNumber}>
+    <PaginationContainer isMovies={isMovies}>
       <PagintationButton disabled={parsedNum === 1} onClick={previousPage}>
         Previous
       </PagintationButton>

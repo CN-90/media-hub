@@ -7,7 +7,7 @@ export const PaginationContainer = styled.ul`
   text-align: right;
   padding-bottom: 20px;
   padding-top: 100px;
-  display: ${props => (isNaN(props.pageNumber) ? 'none' : 'block')};
+  display: ${props => (props.isMovies ? 'block' : 'none')};
 
   @media only screen and (max-width: 768px) {
     width: 100%;

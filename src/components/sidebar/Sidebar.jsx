@@ -2,18 +2,17 @@ import React from 'react';
 import { SidebarNav, Brand, TextContainer } from './Sidebar.styles';
 import { NavLink } from 'react-router-dom';
 
-const Sidebar = () => {
+const Sidebar = ({ menuHidden, setMenuHidden }) => {
   return (
-    <SidebarNav>
+    <SidebarNav menuHidden>
       <Brand>
-        <span className="yellow">MOVIE</span> HUB
+        <span className="gold">MOVIE</span> HUB
       </Brand>
 
       <TextContainer>
         <ul>
           <NavLink
             isActive={(match, location) => {
-              console.log(match);
               if (location.pathname.includes('signin')) return true;
             }}
             activeClassName="active"
@@ -43,10 +42,9 @@ const Sidebar = () => {
             </li>
           </NavLink>
 
-          <p className="yellow">Movies</p>
+          <p className="gold">Movies</p>
           <NavLink
             isActive={(match, location) => {
-              console.log(match);
               if (location.pathname.includes('popular')) return true;
             }}
             activeClassName="active"

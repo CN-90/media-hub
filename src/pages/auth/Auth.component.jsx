@@ -1,20 +1,14 @@
 import React from 'react';
-import { Auth, SignUpIn } from './Auth.styles';
+import { Auth, SignUpIn, CharactersPoster } from './Auth.styles';
 import SignUp from './../../components/sign-up/SignUp.component';
-import background from '../../assets/movie_background.jpg';
-
-const AuthPage = () => {
+import SignIn from '../../components/sign-in/SignIn.component';
+const AuthPage = props => {
+  const currentLocation = props.location.pathname;
   return (
     <Auth>
       <SignUpIn>
-        <div
-          style={{
-            height: '100%',
-            background: `url(${background}) `,
-            backgroundSize: 'contain'
-          }}
-        ></div>
-        <SignUp></SignUp>
+        <CharactersPoster />
+        {currentLocation === '/signup' ? <SignUp></SignUp> : <SignIn></SignIn>}
       </SignUpIn>
     </Auth>
   );

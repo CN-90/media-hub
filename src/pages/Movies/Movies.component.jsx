@@ -14,8 +14,8 @@ const Movies = props => {
   const { movies, isFetching, fetchMovieSearch, getMovies } = props;
   const category = props.location.pathname.split('/')[2].toLowerCase();
   const { movieName, pageNumber } = props.match.params;
-  const title = getPageTitle(category, movieName);
 
+  const title = getPageTitle(category, movieName);
   useEffect(() => {
     if (movieName) {
       fetchMovieSearch(movieName, pageNumber);
@@ -25,8 +25,9 @@ const Movies = props => {
   }, [category, getMovies, pageNumber, movieName, fetchMovieSearch]);
 
   const filteredMovies = movies.results.filter(movie => movie.poster_path);
-
-  return !isFetching ? (
+  return isFetching ? (
+    <Loading />
+  ) : (
     <MoviesPage>
       <MovieCategory>{title}</MovieCategory>
       <MoviesContainer>
@@ -42,10 +43,12 @@ const Movies = props => {
           );
         })}
       </MoviesContainer>
-      <Pagination pageNumber={pageNumber} lastPageNum={movies.totalPages} />
+      <Pagination
+        pageNumber={pageNumber || 0}
+        lastPageNum={movies.totalPages}
+        isMovies={movies.results.length}
+      />
     </MoviesPage>
-  ) : (
-    <Loading />
   );
 };
 
@@ -64,7 +67,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Movies);
+export default connect(mapStateToProps, mapDispatchToProps)(Movies);

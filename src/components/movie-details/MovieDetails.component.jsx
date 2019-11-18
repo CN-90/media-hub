@@ -34,7 +34,7 @@ const MovieDetails = ({
           {title} {yearOfRelease ? `(${yearOfRelease})` : ''}
         </h1>
         <h3
-          className="yellow"
+          className="gold"
           style={{ fontWeight: 'normal', marginBottom: '5px' }}
         >
           {movieGenres}

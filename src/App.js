@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import { Switch, Route } from 'react-router-dom';
 import SearchBar from './components/search-bar/SearchBar.component';
@@ -16,14 +16,15 @@ const ErrorPage = () => (
 );
 
 function App() {
+  const [menuHidden, setMenuHidden] = useState(false);
   return (
     <div className="App">
-      <Sidebar />
-      <SearchBar />
+      <Sidebar menuHidden={menuHidden} setMenuHidden={setMenuHidden} />
+      <SearchBar setMenuHidden />
       <div className="container">
         <Switch>
           <Route exact path="/(signin|signup)" component={AuthPage} />
-          <Route exact path="/movie/:id" component={Movie} />
+          <Route path="/movie/:id" component={Movie} />
           <Route
             exact
             path="/movies/(popular|upcoming|top_rated|now_playing|)/:pageNumber"

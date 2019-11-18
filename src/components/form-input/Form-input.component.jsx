@@ -1,21 +1,13 @@
 import React from 'react';
-import { Input } from './Form-input.styles';
+import { Input, InputGroup, InputLabel } from './Form-input.styles';
 
-const FormInput = () => {
+const FormInput = ({ label, ...otherprops }) => {
   return (
-    <div style={{ width: '70%', margin: '0 auto' }}>
-      <label
-        style={{
-          fontSize: '2rem',
-          paddingBottom: '15px'
-        }}
-        htmlFor=""
-      >
-        Email
-      </label>
+    <InputGroup>
+      <InputLabel htmlFor="">{label}</InputLabel>
       <br></br>
-      <Input placeholder="email" type="text" />
-    </div>
+      <Input placeholder={label} {...otherprops} />
+    </InputGroup>
   );
 };
 

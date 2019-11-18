@@ -17,7 +17,7 @@ export const ActorsContainer = styled.div`
   gap: 3.5rem;
   justify-content: start;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 768px), (max-width: 1024px) {
     justify-content: center;
   }
 `;
@@ -46,4 +46,8 @@ export const ActorImgContainer = styled.div`
     height: 100%;
     width: 100%;
   }
+`;
+
+export const ActorName = styled.h3`
+  padding-top: 5px;
 `;

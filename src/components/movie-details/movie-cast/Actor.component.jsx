@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActorImgContainer, ActorCard } from './Movie-cast.styles';
+import { ActorImgContainer, ActorCard, ActorName } from './Movie-cast.styles';
 import placeholder from '../../../assets/user-placeholder.jpg';
 
 const Actor = ({ image, name }) => {
@@ -15,7 +15,7 @@ const Actor = ({ image, name }) => {
           alt="Actor img"
         />
       </ActorImgContainer>
-      <h3 style={{ paddingTop: '5px' }}>{name}</h3>
+      <ActorName>{name}</ActorName>
     </ActorCard>
   );
 };

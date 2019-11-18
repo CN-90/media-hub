@@ -9,7 +9,7 @@ export const MovieDetailsContainer = styled.div`
   font-size: 1.5rem;
 
   
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 768px), (max-width: 1024px) {
     display: block;
     padding-bottom: 20px;
     text-align: center;
@@ -29,14 +29,10 @@ export const MovieInfo = styled.div`
 
 export const MovieImg = styled.div`
   width: 300px;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 768px), (max-width: 1024px) {
     padding-bottom: 20px;
     margin: 0 auto;
   }
-`;
-
-export const MovieTitle = styled.h1`
-  padding-bottom: 5px;
 `;
 
 export const MovieSummary = styled.p`

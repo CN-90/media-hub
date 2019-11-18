@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 
-export const SignUpContainer = styled.form`
-  min-height: auto;
-
+export const SignInContainer = styled.form`
   h1 {
     text-align: center;
-    margin-top: 40px;
+    padding-top: 40px;
     color: gold;
     font-weight: normal;
   }
@@ -27,8 +25,9 @@ export const SignUpContainer = styled.form`
 
 export const ButtonsContainer = styled.div`
   width: 100%;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 0 auto;
   margin-top: 20px;
-  padding-bottom: 40px;
 `;

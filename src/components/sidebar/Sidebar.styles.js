@@ -10,6 +10,13 @@ export const SidebarNav = styled.div`
   @media only screen and (max-width: 768px) {
     display: none;
   }
+
+  a {
+    color: #959595;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+  }
 `;
 
 export const Brand = styled.h1`
