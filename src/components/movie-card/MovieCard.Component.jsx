@@ -3,9 +3,12 @@ import { withRouter } from 'react-router-dom';
 import { Card, CardImg, CardMovieTitle } from './MovieCard.styles';
 
 const MovieCard = ({ history, image, title, id }) => {
+  console.log(history);
   return (
     <Card>
-      <div onClick={() => history.push(`/movie/${id}`)}>
+      <div
+        onClick={() => history.push(`${history.location.pathname}/movie/${id}`)}
+      >
         <CardImg
           src={`https://image.tmdb.org/t/p/w500/${image}`}
           alt="movie_img"

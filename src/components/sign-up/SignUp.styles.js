@@ -7,7 +7,6 @@ export const SignUpContainer = styled.form`
     text-align: center;
     margin-top: 40px;
     color: gold;
-    font-weight: normal;
   }
 
   p {
@@ -29,6 +28,6 @@ export const ButtonsContainer = styled.div`
   width: 100%;
   text-align: center;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 10px;
   padding-bottom: 40px;
 `;

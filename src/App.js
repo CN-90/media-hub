@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.scss';
 import { Switch, Route } from 'react-router-dom';
 import SearchBar from './components/search-bar/SearchBar.component';
@@ -6,6 +6,7 @@ import Sidebar from './components/sidebar/Sidebar';
 import Movies from './pages/Movies/Movies.component';
 import Movie from './pages/movie/Movie';
 import AuthPage from './pages/auth/Auth.component';
+import { auth } from './firebase/firebase.utils';
 
 const ErrorPage = () => (
   <div>
@@ -16,18 +17,24 @@ const ErrorPage = () => (
 );
 
 function App() {
-  const [menuHidden, setMenuHidden] = useState(false);
+  useEffect(() => {
+    // auth.onAuthStateChanged(user => console.log(user));
+  }, []);
+  const [menuHidden, setMenuHidden] = useState(true);
   return (
     <div className="App">
       <Sidebar menuHidden={menuHidden} setMenuHidden={setMenuHidden} />
-      <SearchBar setMenuHidden />
+      <SearchBar menuHidden={menuHidden} setMenuHidden={setMenuHidden} />
       <div className="container">
         <Switch>
           <Route exact path="/(signin|signup)" component={AuthPage} />
-          <Route path="/movie/:id" component={Movie} />
+          <Route
+            path="/movies/(popular|upcoming|top_rated|now_playing|search)/:searchQuery?/:pageNumber/movie/:id"
+            component={Movie}
+          />
           <Route
             exact
-            path="/movies/(popular|upcoming|top_rated|now_playing|)/:pageNumber"
+            path="/movies/(popular|upcoming|top_rated|now_playing|search)/:movieName?/:pageNumber"
             component={Movies}
           />
           <Route

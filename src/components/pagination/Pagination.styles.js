@@ -14,6 +14,7 @@ export const PaginationContainer = styled.ul`
     display: flex;
     padding-bottom: 0;
     padding-top: 50px;
+    visibility: ${props => (props.isMovies ? 'visible' : 'hidden')};
   }
 `;
 

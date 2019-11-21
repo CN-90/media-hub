@@ -15,6 +15,7 @@ export const MovieCategory = styled.h1`
     margin-left: 0;
     text-align: center;
     padding-bottom: 8%;
+    padding-top: 90px;
   }
 `;
 
@@ -28,5 +29,6 @@ export const MoviesContainer = styled.div`
 
   @media only screen and (max-width: 768px) {
     justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 0.1fr));
   }
 `;

@@ -8,7 +8,16 @@ export const SidebarNav = styled.div`
   padding: 20px;
 
   @media only screen and (max-width: 768px) {
-    display: none;
+    transition: width 2s;
+    z-index: 4;
+    width: 55%;
+    left: -55%;
+    transform: ${props =>
+      props.menuHidden ? 'translateX(0)' : 'translateX(100%)'};
+    top: 45px;
+    transition: transform 0.7s ease-out;
+    height: 100vh;
+    backface-visibility: hidden;
   }
 
   a {
@@ -48,3 +57,6 @@ export const TextContainer = styled.div`
     text-decoration: none;
   }
 `;
+
+// width: ${ props => (props.menuHidden ? '60%' : '0px') };
+// display: ${ props => (props.menuHidden ? 'block' : 'none') };

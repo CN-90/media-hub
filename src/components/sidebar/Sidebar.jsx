@@ -3,8 +3,9 @@ import { SidebarNav, Brand, TextContainer } from './Sidebar.styles';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = ({ menuHidden, setMenuHidden }) => {
+  console.log(menuHidden);
   return (
-    <SidebarNav menuHidden>
+    <SidebarNav menuHidden={menuHidden}>
       <Brand>
         <span className="gold">MOVIE</span> HUB
       </Brand>

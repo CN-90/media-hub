@@ -21,11 +21,12 @@ const Movies = props => {
       fetchMovieSearch(movieName, pageNumber);
     } else {
       getMovies(category, pageNumber);
+      window.scrollTo(0, 0);
     }
   }, [category, getMovies, pageNumber, movieName, fetchMovieSearch]);
 
   const filteredMovies = movies.results.filter(movie => movie.poster_path);
-  return isFetching ? (
+  return isFetching && !filteredMovies.length ? (
     <Loading />
   ) : (
     <MoviesPage>

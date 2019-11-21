@@ -5,7 +5,6 @@ export const SignInContainer = styled.form`
     text-align: center;
     padding-top: 40px;
     color: gold;
-    font-weight: normal;
   }
 
   p {

@@ -1,22 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SignInContainer, ButtonsContainer } from './SignIn.styles';
 import FormInput from './../form-input/Form-input.component';
 import Button from './../button/Button.component';
+import { signInWithGoogle } from './../../firebase/firebase.utils';
 
 const SignIn = () => {
+  const [userCredientials, setUserCredentials] = useState({
+    email: '',
+    password: ''
+  });
+
+  const handleChange = e => {
+    setUserCredentials({
+      ...userCredientials,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(userCredientials);
+    setUserCredentials({ email: '', password: '' });
+  };
+
   return (
-    <SignInContainer>
-      <h1>Have an Account?</h1>
+    <SignInContainer onSubmit={handleSubmit}>
+      <h1>Welcome Back!</h1>
       <p>Sign in Below</p>
-      <FormInput label="Email" />
-      <FormInput label="Password" type="password" />
-      <p style={{ paddingTop: '10px' }}>
+      <FormInput
+        name="email"
+        onChange={handleChange}
+        value={userCredientials.email}
+        label="Email"
+      />
+      <FormInput
+        name="password"
+        value={userCredientials.password}
+        onChange={handleChange}
+        label="Password"
+        type="password"
+      />
+      <p style={{ paddingTop: '20px' }}>
         <Link to="/signup">No Account? Click Here to Sign Up.</Link>
       </p>
       <ButtonsContainer>
-        <Button>Sign In</Button>
-        <Button isGoogle>Sign In With Google</Button>
+        <Button type="submit">Sign In</Button>
+        <Button onClick={signInWithGoogle} isGoogle>
+          Sign In With Google
+        </Button>
       </ButtonsContainer>
     </SignInContainer>
   );

@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SearchBar = props => {
   const [searchedMovie, setMovieSearch] = useState('');
+  const { menuHidden, setMenuHidden } = props;
+  console.log(menuHidden, setMenuHidden);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -27,7 +29,7 @@ const SearchBar = props => {
 
   return (
     <Form>
-      <HamburgerMenu>
+      <HamburgerMenu onClick={() => setMenuHidden(!menuHidden)}>
         <FontAwesomeIcon icon={faBars} color="white" size="2x" />
       </HamburgerMenu>
       <SearchInput
