@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { SidebarNav, Brand, TextContainer } from './Sidebar.styles';
-import { NavLink } from 'react-router-dom';
+import { auth } from './../../firebase/firebase.utils';
+import SidebarLink from './sidebar-link/sidebarLink';
+import { connect } from 'react-redux';
 
-const Sidebar = ({ menuHidden, setMenuHidden }) => {
-  console.log(menuHidden);
+const Sidebar = ({ menuHidden, setMenuHidden, currentUser }) => {
   return (
     <SidebarNav menuHidden={menuHidden}>
       <Brand>
@@ -12,87 +13,77 @@ const Sidebar = ({ menuHidden, setMenuHidden }) => {
 
       <TextContainer>
         <ul>
-          <NavLink
-            isActive={(match, location) => {
-              if (location.pathname.includes('signin')) return true;
-            }}
-            activeClassName="active"
-            to={'/signin'}
-          >
-            <li
-              style={{
-                margin: '35px 0 0 0'
-              }}
-            >
-              Log In
-            </li>
-          </NavLink>
-          <NavLink
-            isActive={(match, location) => {
-              if (location.pathname.includes('signup')) return true;
-            }}
-            activeClassName="active"
-            to={'/signup'}
-          >
-            <li
-              style={{
-                margin: '8px 0 0 0'
-              }}
-            >
-              Sign Up
-            </li>
-          </NavLink>
-
+          {!currentUser ? (
+            <Fragment>
+              <SidebarLink
+                setMenuHidden={setMenuHidden}
+                category="signin"
+                pathname="/signin"
+                text="Log in"
+              />
+              <SidebarLink
+                setMenuHidden={setMenuHidden}
+                category="signup"
+                pathname="/signup"
+                text="Sign up"
+              />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <SidebarLink
+                setMenuHidden={setMenuHidden}
+                category="dashboard"
+                pathname="/signin"
+                text="Dashboard"
+              />
+              <SidebarLink
+                setMenuHidden={setMenuHidden}
+                category="reviews"
+                pathname="/signin"
+                text="Reviews"
+              />
+              <li onClick={() => auth.signOut()}>Sign Out</li>
+            </Fragment>
+          )}
           <p className="gold">Movies</p>
-          <NavLink
-            isActive={(match, location) => {
-              if (location.pathname.includes('popular')) return true;
-            }}
-            activeClassName="active"
-            to={'/movies/popular/1'}
-          >
-            <li>Popular</li>
-          </NavLink>
-          <NavLink
-            isActive={(match, location) => {
-              if (location.pathname.includes('now_playing')) return true;
-            }}
-            activeClassName="active"
-            to={'/movies/now_playing/1'}
-          >
-            <li>Now Playing</li>
-          </NavLink>
-          <NavLink
-            isActive={(match, location) => {
-              if (location.pathname.includes('upcoming')) return true;
-            }}
-            activeClassName="active"
-            to={'/movies/upcoming/1'}
-          >
-            <li>Upcoming</li>
-          </NavLink>
-          <NavLink
-            isActive={(match, location) => {
-              if (location.pathname.includes('top_rated')) return true;
-            }}
-            activeClassName="active"
-            to={'/movies/top_rated/1'}
-          >
-            <li>Top Rated</li>
-          </NavLink>
-          <NavLink
-            isActive={(match, location) => {
-              if (location.pathname.includes('search')) return true;
-            }}
-            activeClassName="active"
-            to={'/movies/search/'}
-          >
-            <li>Search</li>
-          </NavLink>
+          <SidebarLink
+            setMenuHidden={setMenuHidden}
+            category="popular"
+            pathname="/movies/popular/1"
+            text="Popular"
+          />
+          <SidebarLink
+            setMenuHidden={setMenuHidden}
+            category="now_playing"
+            pathname="/movies/now_playing/1"
+            text="Now Playing"
+          />
+          <SidebarLink
+            setMenuHidden={setMenuHidden}
+            category="upcoming"
+            pathname="/movies/upcoming/1"
+            text="Upcoming"
+          />
+          <SidebarLink
+            setMenuHidden={setMenuHidden}
+            category="top_rated"
+            pathname="/movies/top_rated/1"
+            text="Top Rated"
+          />
+          <SidebarLink
+            setMenuHidden={setMenuHidden}
+            category="search"
+            pathname="/movies/search"
+            text="Search"
+          />
         </ul>
       </TextContainer>
     </SidebarNav>
   );
 };
 
-export default Sidebar;
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+});
+
+export default connect(mapStateToProps)(Sidebar);

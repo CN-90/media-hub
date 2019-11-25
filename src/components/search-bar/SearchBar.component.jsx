@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const SearchBar = props => {
   const [searchedMovie, setMovieSearch] = useState('');
   const { menuHidden, setMenuHidden } = props;
-  console.log(menuHidden, setMenuHidden);
 
   const handleSubmit = event => {
     event.preventDefault();

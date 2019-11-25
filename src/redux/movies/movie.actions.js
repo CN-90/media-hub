@@ -30,7 +30,7 @@ export const fetchMoviesByCategory = (category, pageNumber) => {
   return async dispatch => {
     if (pageNumber > 1) dispatch(clearMovies());
     if (category === 'search' && !pageNumber) {
-      await dispatch(clearMovies());
+      dispatch(clearMovies());
       return;
     }
     dispatch(fetchMoviesStart());

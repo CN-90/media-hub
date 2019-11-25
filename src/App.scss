@@ -5,7 +5,7 @@
 }
 
 .container {
-  height: 100%;
+  min-height: 101vh;
   margin-left: 187px;
   position: relative;
   // background: url('./assets/poster_background.jpg');
@@ -47,11 +47,21 @@ p {
   color: #7a7a7a;
 }
 
-@keyframes animate {
-  0% {
-    background-position: -450%;
-  }
-  100% {
-    background-position: 450%;
-  }
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #646464;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #444;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #222;
 }

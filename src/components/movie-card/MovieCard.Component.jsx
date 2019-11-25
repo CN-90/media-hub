@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import { Card, CardImg, CardMovieTitle } from './MovieCard.styles';
 
 const MovieCard = ({ history, image, title, id }) => {
-  console.log(history);
   return (
     <Card>
       <div

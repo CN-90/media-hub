@@ -1,1 +1,7 @@
-const userActionTypes = {};
+const userActionTypes = {
+  SIGN_IN_EMAIL_START: 'SIGN_IN_EMAIL_START',
+  SIGN_IN_GOOGLE_START: 'SIGN_IN_GOOGLE_START',
+  SET_CURRENT_USER: 'SET_CURRENT_USER'
+};
+
+export default userActionTypes;

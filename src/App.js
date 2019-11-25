@@ -6,21 +6,41 @@ import Sidebar from './components/sidebar/Sidebar';
 import Movies from './pages/Movies/Movies.component';
 import Movie from './pages/movie/Movie';
 import AuthPage from './pages/auth/Auth.component';
-import { auth } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { connect } from 'react-redux';
+import { setCurrentUser } from './redux/user/user.actions';
 
 const ErrorPage = () => (
   <div>
-    <h1 style={{ marginnTop: '200px', marginleft: '200px' }}>
+    <h1 style={{ paddingTop: '200px', marginleft: '200px' }}>
       Page not found dawg
     </h1>
   </div>
 );
 
-function App() {
-  useEffect(() => {
-    // auth.onAuthStateChanged(user => console.log(user));
-  }, []);
+function App({ setCurrentUser }) {
   const [menuHidden, setMenuHidden] = useState(true);
+
+  useEffect(() => {
+    let unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+        userRef.onSnapshot(snapShot => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
+          });
+        });
+      } else {
+        setCurrentUser(userAuth);
+      }
+    });
+
+    return () => {
+      unsubscribeFromAuth();
+    };
+  }, [setCurrentUser]);
+
   return (
     <div className="App">
       <Sidebar menuHidden={menuHidden} setMenuHidden={setMenuHidden} />
@@ -28,6 +48,7 @@ function App() {
       <div className="container">
         <Switch>
           <Route exact path="/(signin|signup)" component={AuthPage} />
+
           <Route
             path="/movies/(popular|upcoming|top_rated|now_playing|search)/:searchQuery?/:pageNumber/movie/:id"
             component={Movie}
@@ -49,4 +70,8 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+
+export default connect(null, mapDispatchToProps)(App);

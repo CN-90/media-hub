@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { SignInContainer, ButtonsContainer } from './SignIn.styles';
 import FormInput from './../form-input/Form-input.component';
 import Button from './../button/Button.component';
-import { signInWithGoogle } from './../../firebase/firebase.utils';
+import { signInWithGoogle, auth } from './../../firebase/firebase.utils';
 
 const SignIn = () => {
   const [userCredientials, setUserCredentials] = useState({
@@ -18,10 +18,15 @@ const SignIn = () => {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    console.log(userCredientials);
-    setUserCredentials({ email: '', password: '' });
+    const { email, password } = userCredientials;
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      setUserCredentials({ email: '', password: '' });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

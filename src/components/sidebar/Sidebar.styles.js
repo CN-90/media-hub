@@ -6,18 +6,19 @@ export const SidebarNav = styled.div`
   position: fixed;
   color: #959595;
   padding: 20px;
+  font-smoothing: antialiased;
 
   @media only screen and (max-width: 768px) {
-    transition: width 2s;
     z-index: 4;
-    width: 55%;
-    left: -55%;
+    width: 60%
+    left: -60%;
     transform: ${props =>
-      props.menuHidden ? 'translateX(0)' : 'translateX(100%)'};
+      props.menuHidden ? 'translateX(0px)' : 'translateX(100%) '};
+    font-size: 1rem;
     top: 45px;
-    transition: transform 0.7s ease-out;
+    transition: transform 0.5s ease-out;
     height: 100vh;
-    backface-visibility: hidden;
+    overflow: scroll;
   }
 
   a {
@@ -34,6 +35,7 @@ export const Brand = styled.h1`
   font-family: 'Permanent Marker', cursive;
   color: white;
   margin-top: 5%;
+  padding-bottom: 20px;
 `;
 
 export const TextContainer = styled.div`
@@ -43,6 +45,7 @@ export const TextContainer = styled.div`
     list-style-type: none;
     font-size: 1.7rem;
     margin: 10px;
+    cursor: pointer;
   }
 
   p {

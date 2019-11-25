@@ -12,6 +12,7 @@ const Movie = props => {
   const { isFetching, movie, fetchMovie } = props;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchMovie(id);
   }, [id, fetchMovie]);
 
