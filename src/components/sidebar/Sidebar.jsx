@@ -34,7 +34,7 @@ const Sidebar = ({ menuHidden, setMenuHidden, currentUser }) => {
                 setMenuHidden={setMenuHidden}
                 category="dashboard"
                 pathname="/signin"
-                text="Dashboard"
+                text="My Favorites"
               />
               <SidebarLink
                 setMenuHidden={setMenuHidden}

@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import FormInput from './../form-input/Form-input.component';
 import { SignUpContainer, ButtonsContainer } from './SignUp.styles';
 import Button from '../button/Button.component';
-import {
-  auth,
-  createUserProfileDocument
-} from './../../firebase/firebase.utils';
+import { auth } from './../../firebase/firebase.utils';
+
+import { createUserProfileDocument } from './../../firebase/users.utils';
 
 const SignUp = () => {
   const [userCredientials, setUserCredentials] = useState({

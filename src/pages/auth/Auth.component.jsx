@@ -4,6 +4,7 @@ import SignUp from './../../components/sign-up/SignUp.component';
 import SignIn from '../../components/sign-in/SignIn.component';
 const AuthPage = props => {
   const currentLocation = props.location.pathname;
+
   return (
     <Auth>
       <SignUpIn>

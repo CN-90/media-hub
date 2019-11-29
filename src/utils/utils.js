@@ -11,3 +11,15 @@ export const getPageTitle = (title, search) => {
   };
   return titles[title];
 };
+
+export const getMovieGenres = genreArr => {
+  return genreArr.map(genre => genre.name).join(' / ');
+};
+
+export const getDirectorsName = crew => {
+  return crew.crew.filter(crewMember => crewMember.job === 'Director');
+};
+
+export const formatMovieReleaseDate = release_date => {
+  return release_date.split('-')[0];
+};

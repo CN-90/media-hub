@@ -17,11 +17,11 @@ const Movies = props => {
 
   const title = getPageTitle(category, movieName);
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (movieName) {
       fetchMovieSearch(movieName, pageNumber);
     } else {
       getMovies(category, pageNumber);
-      window.scrollTo(0, 0);
     }
   }, [category, getMovies, pageNumber, movieName, fetchMovieSearch]);
 

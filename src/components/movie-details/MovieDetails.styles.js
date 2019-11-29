@@ -20,6 +20,7 @@ export const MovieDetailsContainer = styled.div`
 `;
 
 export const MovieInfo = styled.div`
+  position: relative;
   padding-left: 40px;
   color: white;
   @media only screen and (max-width: 768px) {

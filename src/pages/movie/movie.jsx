@@ -23,6 +23,7 @@ const Movie = props => {
       ></MovieBackDrop>
 
       <MovieDetails
+        id={movie.movieInfo.id}
         title={movie.movieInfo.title}
         summary={movie.movieInfo.overview}
         poster={movie.movieInfo.poster_path}

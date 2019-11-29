@@ -5,8 +5,15 @@ import {
   MovieSummary,
   MovieInfo
 } from './MovieDetails.styles';
+import Favorite from '../favorite/Favorite.component';
+import {
+  getMovieGenres,
+  getDirectorsName,
+  formatMovieReleaseDate
+} from '../../utils/utils';
 
 const MovieDetails = ({
+  id,
   title,
   summary,
   genres,
@@ -14,11 +21,9 @@ const MovieDetails = ({
   crew,
   release_date
 }) => {
-  const yearOfRelease = release_date ? release_date.split('-')[0] : '';
-  const directorName = crew
-    ? crew.crew.filter(crewMember => crewMember.job === 'Director')
-    : null;
-  const movieGenres = genres ? genres.map(genre => genre.name).join(' / ') : '';
+  const yearOfRelease = formatMovieReleaseDate(release_date);
+  const directorName = getDirectorsName(crew);
+  const movieGenres = getMovieGenres(genres);
 
   return (
     <MovieDetailsContainer>
@@ -28,6 +33,8 @@ const MovieDetails = ({
           alt=""
           style={{ width: '100%', height: '80%' }}
         />
+
+        <Favorite movieId={id} title={title} />
       </MovieImg>
       <MovieInfo>
         <h1 style={{ paddingBottom: '3px' }}>
