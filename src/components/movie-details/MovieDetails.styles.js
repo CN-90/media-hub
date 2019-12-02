@@ -31,7 +31,7 @@ export const MovieInfo = styled.div`
 export const MovieImg = styled.div`
   width: 300px;
   @media only screen and (max-width: 768px), (max-width: 1024px) {
-    padding-bottom: 20px;
+    padding-bottom: 50px;
     margin: 0 auto;
   }
 `;

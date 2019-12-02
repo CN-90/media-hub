@@ -18,6 +18,11 @@ const SignIn = () => {
     });
   };
 
+  const handleGoogleSignIn = e => {
+    e.preventDefault();
+    signInWithGoogle();
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
     const { email, password } = userCredientials;
@@ -51,7 +56,7 @@ const SignIn = () => {
       </p>
       <ButtonsContainer>
         <Button type="submit">Sign In</Button>
-        <Button onClick={signInWithGoogle} isGoogle>
+        <Button onClick={handleGoogleSignIn} isGoogle>
           Sign In With Google
         </Button>
       </ButtonsContainer>

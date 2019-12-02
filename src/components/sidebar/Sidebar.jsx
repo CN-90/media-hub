@@ -32,8 +32,8 @@ const Sidebar = ({ menuHidden, setMenuHidden, currentUser }) => {
             <Fragment>
               <SidebarLink
                 setMenuHidden={setMenuHidden}
-                category="dashboard"
-                pathname="/signin"
+                category="favorites"
+                pathname="/movies/favorites"
                 text="My Favorites"
               />
               <SidebarLink

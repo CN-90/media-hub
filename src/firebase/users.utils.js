@@ -53,14 +53,20 @@ export const realTimeMovieFavorites = (currentUser, setCurrentUser) => {
   return subscription;
 };
 
-export const addorRemoveMovieToFavorites = async (userId, movieId, title) => {
+export const addorRemoveMovieToFavorites = async (
+  userId,
+  movieId,
+  title,
+  poster
+) => {
   const userRef = firestore.doc(`users/${userId}/favorites/${movieId}`);
   const snapShot = await userRef.get();
   if (!snapShot.exists) {
     try {
       userRef.set({
         id: movieId,
-        title: title
+        title,
+        poster
       });
     } catch (error) {
       console.log(error);

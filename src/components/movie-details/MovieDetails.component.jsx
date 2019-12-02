@@ -5,7 +5,7 @@ import {
   MovieSummary,
   MovieInfo
 } from './MovieDetails.styles';
-import Favorite from '../favorite/Favorite.component';
+import FavoriteButton from '../favorite-button/FavoriteButton.component';
 import {
   getMovieGenres,
   getDirectorsName,
@@ -34,7 +34,7 @@ const MovieDetails = ({
           style={{ width: '100%', height: '80%' }}
         />
 
-        <Favorite movieId={id} title={title} />
+        <FavoriteButton movieId={id} title={title} poster={poster} />
       </MovieImg>
       <MovieInfo>
         <h1 style={{ paddingBottom: '3px' }}>

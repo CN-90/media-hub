@@ -23,3 +23,8 @@ export const getDirectorsName = crew => {
 export const formatMovieReleaseDate = release_date => {
   return release_date.split('-')[0];
 };
+
+export const isCurrentMovieLiked = (currentUser, id) => {
+  let index = currentUser.favorites.findIndex(movie => movie.id === id);
+  return index >= 0;
+};

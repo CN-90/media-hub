@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import MovieCard from '../../components/movie-card/MovieCard.Component';
-import { MoviesContainer, MoviesPage, MovieCategory } from './Movies.styles';
+import { MoviesPage } from './Movies.styles';
 import Loading from '../../components/loader/Loading.component';
 import Pagination from './../../components/pagination/Pagination.component';
 import { connect } from 'react-redux';
@@ -8,14 +8,16 @@ import {
   fetchMoviesByCategory,
   fetchMovieSearch
 } from '../../redux/movies/movie.actions';
+
 import { getPageTitle } from './../../utils/utils';
+import { PageTitle as MovieCategory, MoviesGrid } from './../../app.styles';
 
 const Movies = props => {
   const { movies, isFetching, fetchMovieSearch, getMovies } = props;
   const category = props.location.pathname.split('/')[2].toLowerCase();
   const { movieName, pageNumber } = props.match.params;
-
   const title = getPageTitle(category, movieName);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     if (movieName) {
@@ -31,7 +33,7 @@ const Movies = props => {
   ) : (
     <MoviesPage>
       <MovieCategory>{title}</MovieCategory>
-      <MoviesContainer>
+      <MoviesGrid>
         {filteredMovies.map(movie => {
           return (
             <MovieCard
@@ -43,7 +45,7 @@ const Movies = props => {
             />
           );
         })}
-      </MoviesContainer>
+      </MoviesGrid>
       <Pagination
         pageNumber={pageNumber || 0}
         lastPageNum={movies.totalPages}

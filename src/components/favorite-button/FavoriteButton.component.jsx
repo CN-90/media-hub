@@ -2,18 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
-import { addorRemoveMovieToFavorites } from './../../firebase/users.utils';
+import { addorRemoveMovieToFavorites } from '../../firebase/users.utils';
 import { withRouter } from 'react-router-dom';
-import { setCurrentUser } from './../../redux/user/user.actions';
-import { realTimeMovieFavorites } from './../../firebase/users.utils';
+import { setCurrentUser } from '../../redux/user/user.actions';
+import { realTimeMovieFavorites } from '../../firebase/users.utils';
+import { isCurrentMovieLiked } from '../../utils/utils';
 
-const Favorite = ({ currentUser, setCurrentUser, history, movieId, title }) => {
+const FavoriteButton = ({
+  currentUser,
+  setCurrentUser,
+  history,
+  movieId,
+  title,
+  poster
+}) => {
   const [isLiked, setLiked] = useState(false);
   currentUser = currentUser || false;
 
   useEffect(() => {
     // If user is signed in listen for changes to movie favorites, if change is made update user favorites in redux.
     if (currentUser.id) {
+      setLiked(isCurrentMovieLiked(currentUser, movieId));
       let unsubscribeFromFavorites = realTimeMovieFavorites(
         currentUser,
         setCurrentUser
@@ -22,14 +31,14 @@ const Favorite = ({ currentUser, setCurrentUser, history, movieId, title }) => {
         unsubscribeFromFavorites();
       };
     }
-  }, [setCurrentUser, currentUser]);
+  }, [setCurrentUser, currentUser, movieId]);
 
   const likeMovie = async (currentUser, movieId, title) => {
     if (!currentUser) {
       history.push('/signup');
-    } else {
-      addorRemoveMovieToFavorites(currentUser.id, movieId, title);
+      return;
     }
+    addorRemoveMovieToFavorites(currentUser.id, movieId, title, poster);
   };
 
   return (
@@ -47,7 +56,7 @@ const Favorite = ({ currentUser, setCurrentUser, history, movieId, title }) => {
     >
       <FontAwesomeIcon
         icon={faHeart}
-        color={isLiked ? '#CE2029' : '#707070'}
+        color={isLiked ? '#CE2029' : '#919191'}
         size="2x"
       />
     </div>
@@ -65,4 +74,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(Favorite));
+)(withRouter(FavoriteButton));

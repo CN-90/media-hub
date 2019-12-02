@@ -1,7 +1,7 @@
 import userActionTypes from './user.types';
 
 const INITIAL_STATE = {
-  currentUser: {},
+  currentUser: { favorites: [] },
   error: null
 };
 

@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 import { getUsersFavorites } from './firebase/movies.utils';
 import { createUserProfileDocument } from './firebase/users.utils';
+import Favorites from './pages/favorites/Favorites.component';
 
 const ErrorPage = () => (
   <div>
@@ -62,7 +63,7 @@ function App({ setCurrentUser, currentUser }) {
           />
 
           <Route
-            path="/movies/(popular|upcoming|top_rated|now_playing|search)/:searchQuery?/:pageNumber/movie/:id"
+            path="/movies/(popular|upcoming|top_rated|now_playing|search|favorites)/:searchQuery?/movie/:id"
             component={Movie}
           />
           <Route
@@ -75,6 +76,7 @@ function App({ setCurrentUser, currentUser }) {
             path="/movies/search/:movieName?/:pageNumber?"
             component={Movies}
           />
+          <Route exact path="/movies/favorites" component={Favorites} />
           <Route component={ErrorPage} />
         </Switch>
       </div>
