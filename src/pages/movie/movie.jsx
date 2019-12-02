@@ -6,6 +6,7 @@ import Loading from '../../components/loader/Loading.component';
 import { connect } from 'react-redux';
 import { fetchMovie } from './../../redux/movies/movie.actions';
 import MovieCast from '../../components/movie-details/movie-cast/Movie-cast.component';
+import Reviews from '../../components/reviews/Reviews.component';
 
 const Movie = props => {
   const { id } = useParams();
@@ -33,6 +34,7 @@ const Movie = props => {
         crew={movie.movieCredits.data}
       />
       <MovieCast cast={movie.movieCredits.data} />
+      <Reviews />
     </MovieInfoContainer>
   ) : (
     <Loading />

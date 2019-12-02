@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const MovieCastContainer = styled.div`
   width: 80%;
   margin: 0 auto;
-  padding-top: 50px;
+  padding: 50px 0px 110px 0px;
   color: #fff;
 
   h1 {

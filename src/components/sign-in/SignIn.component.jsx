@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SignInContainer, ButtonsContainer } from './SignIn.styles';
 import FormInput from './../form-input/Form-input.component';
-import Button from './../button/Button.component';
 import { signInWithGoogle, auth } from './../../firebase/firebase.utils';
+import Button from './../button/Button.component';
 
 const SignIn = () => {
   const [userCredientials, setUserCredentials] = useState({
