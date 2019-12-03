@@ -45,5 +45,15 @@ export const PagintationButton = styled.li`
 
   @media only screen and (max-width: 768px) {
     width: 100%;
+    :first-child {
+      border-radius: 0px;
+    }
+  
+    :last-child {
+      border-radius: 0px;
+    }
+
+    
+    
   }
 `;

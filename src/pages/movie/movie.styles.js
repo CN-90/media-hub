@@ -9,7 +9,7 @@ export const MovieBackDrop = styled.div`
   background: ${props => props.url};
   height: 100%;
   width: 100%;
-  position: absolute;
+  position: fixed;
   top: 45px;
   overflow: hidden
   background-size: cover;
@@ -26,7 +26,7 @@ export const MovieBackDrop = styled.div`
     left: 0;
     width: 100%;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.83);
+    background-color: rgba(0, 0, 0, 0.90);
   }
 
   @media only screen and (max-width: 768px) {

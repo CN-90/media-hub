@@ -63,7 +63,7 @@ function App({ setCurrentUser, currentUser }) {
           />
 
           <Route
-            path="/movies/(popular|upcoming|top_rated|now_playing|search|favorites)/:searchQuery?/:pageNumber/movie/:id"
+            path="/movies/(popular|upcoming|top_rated|now_playing|search|favorites)/:searchQuery?/:pageNumber?/movie/:id"
             component={Movie}
           />
           <Route

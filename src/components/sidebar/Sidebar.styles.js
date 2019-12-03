@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 
 export const SidebarNav = styled.div`
-  background-color: #212121;
+  background-color: #131313;
   height: 100%;
   position: fixed;
   color: #959595;
   padding: 20px;
-  font-smoothing: antialiased;
 
   @media only screen and (max-width: 768px) {
     z-index: 4;
@@ -27,6 +26,11 @@ export const SidebarNav = styled.div`
     padding: 0;
     margin: 0;
   }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+  
 `;
 
 export const Brand = styled.h1`

@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 export const ReviewsContainer = styled.div`
-  height: 500px;
+  min-height: 100%;
   width: 80%;
   margin: 0 auto;
 
   h1 {
     font-weight: normal;
     color: white;
+    padding-bottom: 50px;
   }
 
   button {

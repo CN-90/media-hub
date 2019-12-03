@@ -4,7 +4,7 @@ export const ReviewContainer = styled.div`
   color: white;
   width: 100%;
   min-height: 200px;
-  background: #242424;
+  background: #131313;
   padding: 20px;
   margin-bottom: 30px;
 `;
@@ -32,6 +32,6 @@ export const ReviewButtons = styled.div`
   padding-bottom: 50px;
 
   button:first-child {
-    background: red;
+    background: #d82d2d;
   }
 `;
