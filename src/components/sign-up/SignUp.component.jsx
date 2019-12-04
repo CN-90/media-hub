@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import FormInput from './../form-input/Form-input.component';
 import { SignUpContainer, ButtonsContainer } from './SignUp.styles';
 import Button from '../button/Button.component';
-import { auth } from './../../firebase/firebase.utils';
+import { connect } from 'react-redux';
+import { SignUpThroughEmail } from '../../redux/user/user.actions';
 
-import { createUserProfileDocument } from './../../firebase/users.utils';
-
-const SignUp = () => {
+const SignUp = ({ SignUpThroughEmail }) => {
   const [userCredientials, setUserCredentials] = useState({
     displayName: '',
     email: '',
@@ -36,21 +35,7 @@ const SignUp = () => {
       return;
     }
 
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      await createUserProfileDocument(user, { displayName });
-      setUserCredentials({
-        displayName: '',
-        email: '',
-        password: '',
-        passwordConfirm: ''
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    SignUpThroughEmail(email, password, { displayName });
   };
   return (
     <SignUpContainer onSubmit={handleSubmit}>
@@ -94,4 +79,9 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+const mapDispatchToProps = dispatch => ({
+  SignUpThroughEmail: (email, password, additionalData) =>
+    dispatch(SignUpThroughEmail(email, password, additionalData))
+});
+
+export default connect(null, mapDispatchToProps)(SignUp);

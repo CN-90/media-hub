@@ -5,7 +5,7 @@ import Review from './review/Review.component';
 import ReviewForm from './review-form/ReviewForm.component';
 import { connect } from 'react-redux';
 
-const Reviews = ({ currentMovie }) => {
+const Reviews = ({ currentMovie, currentUser }) => {
   const [formHidden, toggleFormHidden] = useState(true);
   return (
     <ReviewsContainer>
@@ -16,7 +16,9 @@ const Reviews = ({ currentMovie }) => {
         </Button>
       </h1>
       <ReviewForm
-        title={currentMovie.movieInfo.title}
+        userId={currentUser.id}
+        movieTitle={currentMovie.movieInfo.title}
+        movieId={currentMovie.movieInfo.id}
         formHidden={formHidden}
         toggleFormHidden={toggleFormHidden}
       />
@@ -27,8 +29,9 @@ const Reviews = ({ currentMovie }) => {
   );
 };
 
-const mapStateToProps = ({ movie }) => ({
-  currentMovie: movie.movie
+const mapStateToProps = ({ movie, user }) => ({
+  currentMovie: movie.movie,
+  currentUser: user.currentUser
 });
 
 export default connect(mapStateToProps)(Reviews);

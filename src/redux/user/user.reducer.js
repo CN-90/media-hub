@@ -1,7 +1,7 @@
 import userActionTypes from './user.types';
 
 const INITIAL_STATE = {
-  currentUser: { favorites: [] },
+  currentUser: { favorites: [], id: null, reviews: [] },
   error: null
 };
 
@@ -11,6 +11,24 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentUser: action.payload
+      };
+
+    case userActionTypes.SIGN_UP_FAIL:
+      return {
+        ...state,
+        error: action.payload
+      };
+
+    case userActionTypes.SIGN_UP_SUCCESS:
+      return state;
+
+    case userActionTypes.SET_USER_REVIEWS:
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          reviews: [...state.currentUser.reviews, action.payload]
+        }
       };
 
     default:

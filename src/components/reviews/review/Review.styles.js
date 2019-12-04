@@ -11,7 +11,7 @@ export const ReviewContainer = styled.div`
 
 export const ReviewUsername = styled.h2`
   color: #9bceff;
-  font-size: 2rem;
+  font-size: 2.3rem;
   font-weight: normal;
   cursor: pointer;
   padding-bottom: 5px;

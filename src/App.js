@@ -6,12 +6,15 @@ import Sidebar from './components/sidebar/Sidebar';
 import Movies from './pages/Movies/Movies.component';
 import Movie from './pages/movie/Movie';
 import AuthPage from './pages/auth/Auth.component';
+import Favorites from './pages/favorites/Favorites.component';
 import { auth } from './firebase/firebase.utils';
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 import { getUsersFavorites } from './firebase/movies.utils';
-import { createUserProfileDocument } from './firebase/users.utils';
-import Favorites from './pages/favorites/Favorites.component';
+import {
+  createUserProfileDocument,
+  getUsersReviews
+} from './firebase/users.utils';
 
 const ErrorPage = () => (
   <div>
@@ -28,9 +31,11 @@ function App({ setCurrentUser, currentUser }) {
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot(async snapShot => {
           let favorites = await getUsersFavorites(snapShot.id);
+          let reviews = await getUsersReviews(snapShot.id);
           setCurrentUser({
             id: snapShot.id,
             favorites,
+            reviews,
             ...snapShot.data()
           });
         });

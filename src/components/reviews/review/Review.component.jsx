@@ -12,7 +12,7 @@ const Review = ({ currentUser }) => {
   return (
     <ReviewContainer>
       <ReviewUsername>PenguinzMan</ReviewUsername>
-      <Rating rating={4} changeable={false} />
+      <Rating rating={4} changeable={null} />
       <ReviewSummary>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam odit

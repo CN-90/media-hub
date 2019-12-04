@@ -1,5 +1,6 @@
 import { firestore } from './firebase.utils';
 
+// Creates or finds user depending on whether or not they are already stored in the database.
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
   const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -14,9 +15,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         createdAt,
         ...additionalData
       });
-    } catch (error) {
-      console.log('Error creating user.');
-    }
+    } catch (error) {}
   }
   return userRef;
 };
@@ -74,4 +73,15 @@ export const addorRemoveMovieToFavorites = async (
   } else {
     userRef.delete();
   }
+};
+
+export const getUsersReviews = async userId => {
+  const reviews = [];
+  const reviewRef = await firestore.collection(`/users/${userId}/reviews`);
+  const snapShot = await reviewRef.get();
+  snapShot.forEach(doc => {
+    let reviewData = doc.data();
+    reviews.push({ ...reviewData });
+  });
+  return reviews;
 };

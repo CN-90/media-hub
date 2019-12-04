@@ -7,7 +7,7 @@ export const ReviewsContainer = styled.div`
 
   h1 {
     font-weight: normal;
-    color: white;
+    color: #fff;
     padding-bottom: 50px;
   }
 

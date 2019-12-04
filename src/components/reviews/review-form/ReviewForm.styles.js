@@ -22,9 +22,8 @@ export const ReviewFormContainer = styled.div`
   }
 
   h1 {
-    color: gold;
-    font-weight: normal;
-    padding-bottom: 5px;
+    color: #9bceff;
+    padding-bottom: 10px;
   }
 
   div {
