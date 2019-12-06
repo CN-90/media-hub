@@ -7,21 +7,15 @@ import {
 } from './Review.styles';
 import Rating from './../../rating/Rating.component';
 import Button from './../../button/Button.component';
+import Loading from './../../loader/Loading.component';
 
-const Review = ({ currentUser }) => {
+const Review = ({ reviewDetails, currentUser }) => {
   return (
     <ReviewContainer>
-      <ReviewUsername>PenguinzMan</ReviewUsername>
-      <Rating rating={4} changeable={null} />
+      <ReviewUsername>{reviewDetails.displayName}</ReviewUsername>
+      <Rating rating={reviewDetails.movieRating} changeable={null} />
       <ReviewSummary>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam odit
-          enim quod nesciunt explicabo! Suscipit consequuntur veniam
-          reprehenderit veritatis sint fugit reiciendis nostrum dicta cupiditate
-          amet accusantium magni totam asperiores, ipsa aut accusamus error
-          optio id, sequi voluptate! Veniam expedita ut illum, pariatur
-          consectetur enim dolorum magnam a illo quasi.
-        </p>
+        <p>{reviewDetails.movieSummary}</p>
       </ReviewSummary>
       {currentUser ? (
         <ReviewButtons>

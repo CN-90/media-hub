@@ -4,6 +4,7 @@ import {
   fetchMoviesAsync,
   fetchMoviesSearchAsync
 } from './movie.utils';
+import { firestore } from '../../firebase/firebase.utils';
 
 // Fetches a single movie based on movies ID
 export const fetchMovie = id => {
@@ -61,6 +62,22 @@ export const fetchMovieSearch = (searchTerm, pageNumber) => {
       })
       .catch(err => dispatch(fetchMoviesFailure(err.message)));
     dispatch(fetchMoviesFinish());
+  };
+};
+
+export const fetchMovieReviews = movieId => {
+  return async dispatch => {
+    let movieReviews = await firestore.collection(`Movies/${movieId}/reviews`);
+    const reviewsSnapShot = await movieReviews.get();
+    if (!reviewsSnapShot) {
+      return;
+    } else {
+      let reviews = [];
+      reviewsSnapShot.forEach(reviewDoc => {
+        reviews.push(reviewDoc.data());
+      });
+      dispatch({ type: movieActionTypes.SET_MOVIE_REVIEWS, payload: reviews });
+    }
   };
 };
 

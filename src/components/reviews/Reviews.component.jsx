@@ -1,37 +1,93 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ReviewsContainer, ReviewContainer } from './Reviews.styles';
 import Button from './../button/Button.component';
 import Review from './review/Review.component';
 import ReviewForm from './review-form/ReviewForm.component';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { fetchMovieReviews } from '../../redux/movies/movie.actions';
+import { isCurrentMovieReviewed } from '../../utils/utils';
+import Loading from './../loader/Loading.component';
 
-const Reviews = ({ currentMovie, currentUser }) => {
+const Reviews = ({
+  currentMovie,
+  currentUser,
+  history,
+  fetchMovieReviews,
+  reviews
+}) => {
   const [formHidden, toggleFormHidden] = useState(true);
-  return (
+  const [isMovieReviewed, setIsMovieReviwed] = useState({});
+  const isUserSignedIn = currentUser ? currentUser : false;
+
+  const onClickHandler = () => {
+    if (!currentUser) {
+      history.push('/signup');
+      return;
+    }
+    toggleFormHidden(!formHidden);
+  };
+
+  useEffect(() => {
+    fetchMovieReviews(currentMovie.movieInfo.id);
+    if (currentUser) {
+      setIsMovieReviwed(
+        isCurrentMovieReviewed(currentUser, currentMovie.movieInfo.id)
+      );
+    }
+  }, [
+    setIsMovieReviwed,
+    currentUser,
+    fetchMovieReviews,
+    currentMovie.movieInfo.id
+  ]);
+  let filteredReviews = isMovieReviewed.review
+    ? reviews.filter(
+        reviews => reviews.userId !== isMovieReviewed.review.userId
+      )
+    : reviews;
+  return reviews ? (
     <ReviewsContainer>
       <h1>
-        Reviews (1)
-        <Button onClick={() => toggleFormHidden(!formHidden)}>
-          Add Review
-        </Button>
+        Reviews ({reviews.length})
+        <Button onClick={onClickHandler}>Add Review</Button>
       </h1>
-      <ReviewForm
-        userId={currentUser.id}
-        movieTitle={currentMovie.movieInfo.title}
-        movieId={currentMovie.movieInfo.id}
-        formHidden={formHidden}
-        toggleFormHidden={toggleFormHidden}
-      />
+      {!isMovieReviewed.beenReviwed ? (
+        <ReviewForm
+          userId={isUserSignedIn.id}
+          displayName={isUserSignedIn.displayName}
+          movieTitle={currentMovie.movieInfo.title}
+          movieId={currentMovie.movieInfo.id}
+          formHidden={formHidden}
+          toggleFormHidden={toggleFormHidden}
+        />
+      ) : (
+        <Review
+          reviewDetails={isMovieReviewed.review}
+          currentUser={currentUser}
+        />
+      )}
       <ReviewContainer>
-        <Review currentUser={true} />
+        {filteredReviews.map(review => (
+          <Review key={review.userId} reviewDetails={review} />
+        ))}
       </ReviewContainer>
     </ReviewsContainer>
+  ) : (
+    <Loading />
   );
 };
 
-const mapStateToProps = ({ movie, user }) => ({
-  currentMovie: movie.movie,
-  currentUser: user.currentUser
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser,
+  reviews: state.movie.movieReviews
 });
 
-export default connect(mapStateToProps)(Reviews);
+const mapDispatchToProps = dispatch => ({
+  fetchMovieReviews: movieId => dispatch(fetchMovieReviews(movieId))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Reviews));

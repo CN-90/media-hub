@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import MovieDetails from '../../components/movie-details/MovieDetails.component';
-import { useParams } from 'react-router-dom';
-import { MovieInfoContainer, MovieBackDrop } from './Movie.styles';
 import Loading from '../../components/loader/Loading.component';
-import { connect } from 'react-redux';
-import { fetchMovie } from './../../redux/movies/movie.actions';
 import MovieCast from '../../components/movie-details/movie-cast/Movie-cast.component';
 import Reviews from '../../components/reviews/Reviews.component';
+import { MovieInfoContainer, MovieBackDrop } from './Movie.styles';
+import { fetchMovie } from './../../redux/movies/movie.actions';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const Movie = props => {
   const { id } = useParams();
@@ -34,7 +34,7 @@ const Movie = props => {
         crew={movie.movieCredits.data}
       />
       <MovieCast cast={movie.movieCredits.data} />
-      <Reviews />
+      <Reviews currentMovie={movie} />
     </MovieInfoContainer>
   ) : (
     <Loading />

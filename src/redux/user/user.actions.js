@@ -28,27 +28,26 @@ export const SignInThroughEmail = (email, password, additionalData) => {
   return async dispatch => {};
 };
 
-export const addUserReview = summaryDetails => {
-  const {
-    movieId,
-    movieTitle,
-    movieSummary,
-    movieRating,
-    userId
-  } = summaryDetails;
+export const addUserReview = reviewDetails => {
+  const { movieId, userId } = reviewDetails;
   return async dispatch => {
+    let reviewBatch = firestore.batch();
     let usersMovieReview = firestore.doc(`/users/${userId}/reviews/${movieId}`);
+    let movieReviews = firestore.doc(`Movies/${movieId}/reviews/${userId}`);
     const reviewSnapShot = await usersMovieReview.get();
     if (!reviewSnapShot.exists) {
-      let movieReview = { movieTitle, movieSummary, movieRating };
-      usersMovieReview.set({
-        ...movieReview
-      });
-      dispatch({
-        type: userActionTypes.SET_USER_REVIEWS,
-        payload: movieReview
-      });
-      dispatch({ type: 'ADD_REVIEW_SUCCESS' });
+      reviewBatch.set(usersMovieReview, reviewDetails);
+      reviewBatch.set(movieReviews, reviewDetails);
+      reviewBatch
+        .commit()
+        .then(data => {
+          dispatch({
+            type: userActionTypes.SET_USER_REVIEWS,
+            payload: reviewDetails
+          });
+          dispatch({ type: 'ADD_REVIEW_SUCCESS' });
+        })
+        .catch(err => console.log(err));
     } else {
       return;
     }

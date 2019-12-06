@@ -8,7 +8,7 @@ export const ReviewsContainer = styled.div`
   h1 {
     font-weight: normal;
     color: #fff;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
   }
 
   button {
@@ -25,5 +25,6 @@ export const ReviewsContainer = styled.div`
 `;
 
 export const ReviewContainer = styled.div`
-  padding-top: 50px;
+  padding-top: 30px;
+  padding-bottom: 50px;
 `;

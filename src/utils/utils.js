@@ -33,7 +33,15 @@ export const isCurrentMovieLiked = (currentUser, id) => {
   return index >= 0;
 };
 
-export const isCurrentMovieReviewed = (currentUser, movieId) => {};
+export const isCurrentMovieReviewed = (currentUser, movieId) => {
+  let index = currentUser.reviews.findIndex(
+    review => review.movieId === movieId
+  );
+  return {
+    beenReviwed: index >= 0,
+    review: currentUser.reviews[index]
+  };
+};
 
 // validaes password for sign ups.
 export const validatePassword = (passwordOne, passwordTwo) => {

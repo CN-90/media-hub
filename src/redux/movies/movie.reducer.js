@@ -4,6 +4,7 @@ import movieActionTypes from './movie.types';
 const INITIAL_STATE = {
   movies: { results: [], totalPages: null },
   movie: {},
+  movieReviews: [],
   pageNumber: 1,
   error: null,
   movieSearch: null,
@@ -52,6 +53,12 @@ const movieReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         movieSearch: action.payload
+      };
+
+    case movieActionTypes.SET_MOVIE_REVIEWS:
+      return {
+        ...state,
+        movieReviews: [...action.payload]
       };
     default:
       return state;

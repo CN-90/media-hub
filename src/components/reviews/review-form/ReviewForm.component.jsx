@@ -13,9 +13,9 @@ const ReviewForm = ({
   movieTitle,
   movieId,
   addUserReview,
-  userId
+  userId,
+  displayName
 }) => {
-  console.log(userId);
   const [movieRating, setRating] = useState(0);
   const [movieSummary, setSummary] = useState('');
 
@@ -40,7 +40,8 @@ const ReviewForm = ({
       movieId,
       movieSummary,
       movieRating,
-      userId
+      userId,
+      displayName
     };
     addUserReview(reviewDetails);
   };
