@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ReviewFormContainer, ReviewTextArea } from './ReviewForm.styles';
 import Rating from '../../rating/Rating.component';
 import Button from './../../button/Button.component';
@@ -14,10 +14,18 @@ const ReviewForm = ({
   movieId,
   addUserReview,
   userId,
-  displayName
+  displayName,
+  editMode
 }) => {
   const [movieRating, setRating] = useState(0);
   const [movieSummary, setSummary] = useState('');
+
+  useEffect(() => {
+    if (editMode) {
+      setSummary(editMode.movieSummary);
+      setRating(editMode.movieRating);
+    }
+  }, [setSummary, editMode]);
 
   const onEnterSubmit = e => {
     if (e.keyCode === 13 && e.shiftKey === false) {
@@ -43,7 +51,12 @@ const ReviewForm = ({
       userId,
       displayName
     };
-    addUserReview(reviewDetails);
+    if (editMode) {
+      alert('Movie has been updated...');
+    } else {
+      addUserReview(reviewDetails);
+      toggleFormHidden(true);
+    }
   };
 
   return (
@@ -66,7 +79,7 @@ const ReviewForm = ({
           onChange={handleChange}
           placeholder={`Leave your review for ${movieTitle}`}
         ></ReviewTextArea>
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{editMode ? 'Update' : 'Submit'}</Button>
       </form>
     </ReviewFormContainer>
   );

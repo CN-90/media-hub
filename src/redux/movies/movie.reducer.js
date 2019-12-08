@@ -1,5 +1,5 @@
 import movieActionTypes from './movie.types';
-// import { getMovies } from './movie.utils';
+import { filterOutDeletedReview } from './../../utils/utils';
 
 const INITIAL_STATE = {
   movies: { results: [], totalPages: null },
@@ -60,6 +60,13 @@ const movieReducer = (state = INITIAL_STATE, action) => {
         ...state,
         movieReviews: [...action.payload]
       };
+
+    case 'DELETE_REVIEW':
+      return {
+        ...state,
+        movieReviews: filterOutDeletedReview(state.movieReviews, action.payload)
+      };
+
     default:
       return state;
   }

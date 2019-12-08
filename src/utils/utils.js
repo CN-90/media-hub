@@ -38,9 +38,13 @@ export const isCurrentMovieReviewed = (currentUser, movieId) => {
     review => review.movieId === movieId
   );
   return {
-    beenReviwed: index >= 0,
+    beenReviewed: index >= 0,
     review: currentUser.reviews[index]
   };
+};
+
+export const filterOutDeletedReview = (currentState, movieId) => {
+  return currentState.filter(review => review.movieId !== movieId);
 };
 
 // validaes password for sign ups.

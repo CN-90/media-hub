@@ -7,9 +7,12 @@ import {
 } from './Review.styles';
 import Rating from './../../rating/Rating.component';
 import Button from './../../button/Button.component';
-import Loading from './../../loader/Loading.component';
 
-const Review = ({ reviewDetails, currentUser }) => {
+const Review = ({ reviewDetails, currentUser, deleteReview }) => {
+  const handleDeleteClick = (userId, movieId) => {
+    deleteReview(userId, movieId);
+  };
+
   return (
     <ReviewContainer>
       <ReviewUsername>{reviewDetails.displayName}</ReviewUsername>
@@ -19,8 +22,13 @@ const Review = ({ reviewDetails, currentUser }) => {
       </ReviewSummary>
       {currentUser ? (
         <ReviewButtons>
-          <Button>Delete</Button>
-          <Button>Edit</Button>
+          <Button
+            onClick={() =>
+              handleDeleteClick(currentUser.id, reviewDetails.movieId)
+            }
+          >
+            Delete
+          </Button>
         </ReviewButtons>
       ) : null}
     </ReviewContainer>

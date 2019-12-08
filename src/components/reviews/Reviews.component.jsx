@@ -8,13 +8,15 @@ import { withRouter } from 'react-router-dom';
 import { fetchMovieReviews } from '../../redux/movies/movie.actions';
 import { isCurrentMovieReviewed } from '../../utils/utils';
 import Loading from './../loader/Loading.component';
+import { deleteUserReview } from '../../redux/user/user.actions';
 
 const Reviews = ({
   currentMovie,
   currentUser,
   history,
   fetchMovieReviews,
-  reviews
+  reviews,
+  deleteUserReview
 }) => {
   const [formHidden, toggleFormHidden] = useState(true);
   const [isMovieReviewed, setIsMovieReviwed] = useState({});
@@ -29,6 +31,7 @@ const Reviews = ({
   };
 
   useEffect(() => {
+    console.log('Rendering.');
     fetchMovieReviews(currentMovie.movieInfo.id);
     if (currentUser) {
       setIsMovieReviwed(
@@ -41,35 +44,42 @@ const Reviews = ({
     fetchMovieReviews,
     currentMovie.movieInfo.id
   ]);
+
+  // Filter out the logged in users review from the rest.
   let filteredReviews = isMovieReviewed.review
     ? reviews.filter(
         reviews => reviews.userId !== isMovieReviewed.review.userId
       )
     : reviews;
+
   return reviews ? (
     <ReviewsContainer>
       <h1>
         Reviews ({reviews.length})
-        <Button onClick={onClickHandler}>Add Review</Button>
+        <Button onClick={onClickHandler}>
+          {isMovieReviewed.beenReviewed ? 'Edit Review' : 'Leave Review'}
+        </Button>
       </h1>
-      {!isMovieReviewed.beenReviwed ? (
-        <ReviewForm
-          userId={isUserSignedIn.id}
-          displayName={isUserSignedIn.displayName}
-          movieTitle={currentMovie.movieInfo.title}
-          movieId={currentMovie.movieInfo.id}
-          formHidden={formHidden}
-          toggleFormHidden={toggleFormHidden}
-        />
-      ) : (
+      <ReviewForm
+        userId={isUserSignedIn.id}
+        displayName={isUserSignedIn.displayName}
+        movieTitle={currentMovie.movieInfo.title}
+        movieId={currentMovie.movieInfo.id}
+        formHidden={formHidden}
+        toggleFormHidden={toggleFormHidden}
+        editMode={isMovieReviewed.review}
+        setIsMovieReviwed={setIsMovieReviwed}
+      />
+      {isMovieReviewed.review && formHidden ? (
         <Review
+          deleteReview={deleteUserReview}
           reviewDetails={isMovieReviewed.review}
           currentUser={currentUser}
         />
-      )}
+      ) : null}
       <ReviewContainer>
         {filteredReviews.map(review => (
-          <Review key={review.userId} reviewDetails={review} />
+          <Review key={review.displayName} reviewDetails={review} />
         ))}
       </ReviewContainer>
     </ReviewsContainer>
@@ -84,7 +94,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchMovieReviews: movieId => dispatch(fetchMovieReviews(movieId))
+  fetchMovieReviews: movieId => dispatch(fetchMovieReviews(movieId)),
+  deleteUserReview: (userId, movieId) =>
+    dispatch(deleteUserReview(userId, movieId))
 });
 
 export default connect(

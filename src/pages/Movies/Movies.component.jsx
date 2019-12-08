@@ -28,7 +28,7 @@ const Movies = props => {
   }, [category, getMovies, pageNumber, movieName, fetchMovieSearch]);
 
   const filteredMovies = movies.results.filter(movie => movie.poster_path);
-  return isFetching && !filteredMovies.length ? (
+  return isFetching ? (
     <Loading />
   ) : (
     <MoviesPage>

@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export const ReviewsContainer = styled.div`
-  min-height: 100%;
   width: 80%;
   margin: 0 auto;
+  min-height: 100%;
+  height: calc(60vh + 200px);
 
   h1 {
     font-weight: normal;
