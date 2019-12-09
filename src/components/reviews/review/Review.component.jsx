@@ -8,8 +8,14 @@ import {
 import Rating from './../../rating/Rating.component';
 import Button from './../../button/Button.component';
 
-const Review = ({ reviewDetails, currentUser, deleteReview }) => {
+const Review = ({
+  reviewDetails,
+  currentUser,
+  deleteReview,
+  setIsMovieReviwed
+}) => {
   const handleDeleteClick = (userId, movieId) => {
+    setIsMovieReviwed({});
     deleteReview(userId, movieId);
   };
 

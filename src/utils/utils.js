@@ -43,8 +43,16 @@ export const isCurrentMovieReviewed = (currentUser, movieId) => {
   };
 };
 
-export const filterOutDeletedReview = (currentState, movieId) => {
-  return currentState.filter(review => review.movieId !== movieId);
+export const filterOutDeletedReview = (currentState, userId) => {
+  return currentState.filter(review => review.userId !== userId);
+};
+
+export const filterOutAndAddUpdatedReview = (currentState, newReview) => {
+  let newReviews = currentState.filter(
+    review => review.userId !== newReview.userId
+  );
+  newReviews.push(newReview);
+  return newReviews;
 };
 
 // validaes password for sign ups.

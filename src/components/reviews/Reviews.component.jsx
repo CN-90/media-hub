@@ -31,7 +31,6 @@ const Reviews = ({
   };
 
   useEffect(() => {
-    console.log('Rendering.');
     fetchMovieReviews(currentMovie.movieInfo.id);
     if (currentUser) {
       setIsMovieReviwed(
@@ -75,6 +74,7 @@ const Reviews = ({
           deleteReview={deleteUserReview}
           reviewDetails={isMovieReviewed.review}
           currentUser={currentUser}
+          setIsMovieReviwed={setIsMovieReviwed}
         />
       ) : null}
       <ReviewContainer>

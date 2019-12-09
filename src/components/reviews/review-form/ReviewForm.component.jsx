@@ -5,7 +5,10 @@ import Button from './../../button/Button.component';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
-import { addUserReview } from '../../../redux/user/user.actions';
+import {
+  addUserReview,
+  updateUserReview
+} from '../../../redux/user/user.actions';
 
 const ReviewForm = ({
   formHidden,
@@ -13,6 +16,7 @@ const ReviewForm = ({
   movieTitle,
   movieId,
   addUserReview,
+  updateUserReview,
   userId,
   displayName,
   editMode
@@ -24,6 +28,9 @@ const ReviewForm = ({
     if (editMode) {
       setSummary(editMode.movieSummary);
       setRating(editMode.movieRating);
+    } else {
+      setSummary('');
+      setRating(0);
     }
   }, [setSummary, editMode]);
 
@@ -52,11 +59,11 @@ const ReviewForm = ({
       displayName
     };
     if (editMode) {
-      alert('Movie has been updated...');
+      updateUserReview(reviewDetails);
     } else {
       addUserReview(reviewDetails);
-      toggleFormHidden(true);
     }
+    toggleFormHidden(true);
   };
 
   return (
@@ -86,7 +93,8 @@ const ReviewForm = ({
 };
 
 const mapDispatchToProps = dispatch => ({
-  addUserReview: reviewDetails => dispatch(addUserReview(reviewDetails))
+  addUserReview: reviewDetails => dispatch(addUserReview(reviewDetails)),
+  updateUserReview: reviewDetails => dispatch(updateUserReview(reviewDetails))
 });
 
 export default connect(null, mapDispatchToProps)(ReviewForm);

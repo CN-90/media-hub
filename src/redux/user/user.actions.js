@@ -55,7 +55,7 @@ export const addUserReview = reviewDetails => {
 };
 
 export const deleteUserReview = (userId, movieId) => {
-  return async dispatch => {
+  return dispatch => {
     let reviewBatch = firestore.batch();
     let usersMovieReview = firestore.doc(`/users/${userId}/reviews/${movieId}`);
     let movieReviews = firestore.doc(`Movies/${movieId}/reviews/${userId}`);
@@ -67,7 +67,29 @@ export const deleteUserReview = (userId, movieId) => {
       .then(() => {
         dispatch({
           type: 'DELETE_REVIEW',
-          payload: movieId
+          payload: userId
+        });
+        // dispatch({ type: 'DELETE_REVIEW_SUCCESS' });
+      })
+      .catch(err => console.log(err));
+  };
+};
+
+export const updateUserReview = reviewDetails => {
+  let { userId, movieId } = reviewDetails;
+  return async dispatch => {
+    let reviewBatch = firestore.batch();
+    let usersMovieReview = firestore.doc(`/users/${userId}/reviews/${movieId}`);
+    let movieReviews = firestore.doc(`Movies/${movieId}/reviews/${userId}`);
+
+    reviewBatch.update(usersMovieReview, reviewDetails);
+    reviewBatch.update(movieReviews, reviewDetails);
+    reviewBatch
+      .commit()
+      .then(() => {
+        dispatch({
+          type: 'UPDATE_REVIEW',
+          payload: reviewDetails
         });
         // dispatch({ type: 'DELETE_REVIEW_SUCCESS' });
       })

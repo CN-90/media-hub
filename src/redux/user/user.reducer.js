@@ -1,5 +1,8 @@
 import userActionTypes from './user.types';
-import { filterOutDeletedReview } from './../../utils/utils';
+import {
+  filterOutDeletedReview,
+  filterOutAndAddUpdatedReview
+} from './../../utils/utils';
 
 const INITIAL_STATE = {
   currentUser: { favorites: [], id: '', reviews: [] },
@@ -39,7 +42,19 @@ const userReducer = (state = INITIAL_STATE, action) => {
         currentUser: {
           ...state.currentUser,
           reviews: filterOutDeletedReview(
-            state.currentUser.reviews,
+            state.currentUser.reviews.slice(),
+            action.payload
+          )
+        }
+      };
+
+    case userActionTypes.UPDATE_REVIEW:
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          reviews: filterOutAndAddUpdatedReview(
+            state.currentUser.reviews.slice(),
             action.payload
           )
         }
