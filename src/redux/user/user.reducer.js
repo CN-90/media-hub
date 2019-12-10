@@ -1,6 +1,6 @@
 import userActionTypes from './user.types';
 import {
-  filterOutDeletedReview,
+  filterOutUsersDeletedReview,
   filterOutAndAddUpdatedReview
 } from './../../utils/utils';
 
@@ -41,9 +41,9 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         currentUser: {
           ...state.currentUser,
-          reviews: filterOutDeletedReview(
+          reviews: filterOutUsersDeletedReview(
             state.currentUser.reviews.slice(),
-            action.payload
+            action.payload.movieId
           )
         }
       };

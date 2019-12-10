@@ -10,6 +10,7 @@ import { firestore } from '../../firebase/firebase.utils';
 export const fetchMovie = id => {
   return async dispatch => {
     dispatch(clearMovies());
+    dispatch(clearReviews());
     dispatch(fetchMoviesStart());
 
     await fetchMovieAsync(id)
@@ -106,6 +107,10 @@ export const fetchMoviesFailure = error => ({
 
 export const clearMovies = () => ({
   type: movieActionTypes.CLEAR_MOVIES
+});
+
+export const clearReviews = () => ({
+  type: movieActionTypes.CLEAR_REVIEWS
 });
 
 export const setSearchQuery = searchTerm => ({

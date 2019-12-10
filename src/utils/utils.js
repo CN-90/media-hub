@@ -1,3 +1,5 @@
+import { doesUsernameExist } from '../firebase/users.utils';
+
 // return page title depending on url location passed in as title
 export const getPageTitle = (title, search) => {
   const titles = {
@@ -43,7 +45,11 @@ export const isCurrentMovieReviewed = (currentUser, movieId) => {
   };
 };
 
-export const filterOutDeletedReview = (currentState, userId) => {
+export const filterOutUsersDeletedReview = (currentState, movieId) => {
+  return currentState.filter(review => review.movieId !== movieId);
+};
+
+export const filterOutMoviesDeletedReview = (currentState, userId) => {
   return currentState.filter(review => review.userId !== userId);
 };
 
@@ -56,10 +62,18 @@ export const filterOutAndAddUpdatedReview = (currentState, newReview) => {
 };
 
 // validaes password for sign ups.
-export const validatePassword = (passwordOne, passwordTwo) => {
-  if (passwordOne.length < 6) {
-    return 'Password must be more than six characters';
-  } else if (passwordOne !== passwordTwo) {
-    return 'Passwords do not match.';
+export const validateSignup = async (passwordOne, passwordTwo, displayName) => {
+  let userNameExists = await doesUsernameExist(displayName);
+  if (userNameExists) {
+    alert('Username already exists.');
+    return false;
   }
+  if (passwordOne.length < 6) {
+    alert('Password must be more than six characters');
+    return false;
+  } else if (passwordOne !== passwordTwo) {
+    alert('Passwords do not match.');
+    return false;
+  }
+  return true;
 };

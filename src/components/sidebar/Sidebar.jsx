@@ -39,7 +39,7 @@ const Sidebar = ({ menuHidden, setMenuHidden, currentUser }) => {
               <SidebarLink
                 setMenuHidden={setMenuHidden}
                 category="reviews"
-                pathname="/signin"
+                pathname="/movies/reviews"
                 text="Reviews"
               />
               <li onClick={() => auth.signOut()}>Sign Out</li>

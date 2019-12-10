@@ -7,6 +7,7 @@ import Movies from './pages/Movies/Movies.component';
 import Movie from './pages/movie/Movie';
 import AuthPage from './pages/auth/Auth.component';
 import Favorites from './pages/favorites/Favorites.component';
+import Reviews from './pages/reviews/Reviews.component.';
 import { auth } from './firebase/firebase.utils';
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
@@ -82,6 +83,8 @@ function App({ setCurrentUser, currentUser }) {
             component={Movies}
           />
           <Route exact path="/movies/favorites" component={Favorites} />
+          <Route exact path="/movies/reviews" component={Reviews} />
+
           <Route component={ErrorPage} />
         </Switch>
       </div>

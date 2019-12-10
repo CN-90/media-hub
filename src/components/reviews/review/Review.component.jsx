@@ -7,21 +7,28 @@ import {
 } from './Review.styles';
 import Rating from './../../rating/Rating.component';
 import Button from './../../button/Button.component';
+import { deleteUserReview } from './../../../redux/user/user.actions';
+import { connect } from 'react-redux';
 
 const Review = ({
   reviewDetails,
   currentUser,
-  deleteReview,
-  setIsMovieReviwed
+  setIsMovieReviwed,
+  deleteUserReview,
+  displayTitle
 }) => {
   const handleDeleteClick = (userId, movieId) => {
-    setIsMovieReviwed({});
-    deleteReview(userId, movieId);
+    if (setIsMovieReviwed) {
+      setIsMovieReviwed({});
+    }
+    deleteUserReview(userId, movieId);
   };
 
   return (
     <ReviewContainer>
-      <ReviewUsername>{reviewDetails.displayName}</ReviewUsername>
+      <ReviewUsername>
+        {!displayTitle ? reviewDetails.displayName : reviewDetails.movieTitle}
+      </ReviewUsername>
       <Rating rating={reviewDetails.movieRating} changeable={null} />
       <ReviewSummary>
         <p>{reviewDetails.movieSummary}</p>
@@ -41,4 +48,8 @@ const Review = ({
   );
 };
 
-export default Review;
+const mapDispatchToProps = dispatch => ({
+  deleteUserReview: (userId, movieId) =>
+    dispatch(deleteUserReview(userId, movieId))
+});
+export default connect(null, mapDispatchToProps)(Review);

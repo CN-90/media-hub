@@ -8,15 +8,13 @@ import { withRouter } from 'react-router-dom';
 import { fetchMovieReviews } from '../../redux/movies/movie.actions';
 import { isCurrentMovieReviewed } from '../../utils/utils';
 import Loading from './../loader/Loading.component';
-import { deleteUserReview } from '../../redux/user/user.actions';
 
 const Reviews = ({
   currentMovie,
   currentUser,
   history,
   fetchMovieReviews,
-  reviews,
-  deleteUserReview
+  reviews
 }) => {
   const [formHidden, toggleFormHidden] = useState(true);
   const [isMovieReviewed, setIsMovieReviwed] = useState({});
@@ -64,6 +62,7 @@ const Reviews = ({
         displayName={isUserSignedIn.displayName}
         movieTitle={currentMovie.movieInfo.title}
         movieId={currentMovie.movieInfo.id}
+        posterPath={currentMovie.movieInfo.poster_path}
         formHidden={formHidden}
         toggleFormHidden={toggleFormHidden}
         editMode={isMovieReviewed.review}
@@ -71,7 +70,6 @@ const Reviews = ({
       />
       {isMovieReviewed.review && formHidden ? (
         <Review
-          deleteReview={deleteUserReview}
           reviewDetails={isMovieReviewed.review}
           currentUser={currentUser}
           setIsMovieReviwed={setIsMovieReviwed}
@@ -94,9 +92,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchMovieReviews: movieId => dispatch(fetchMovieReviews(movieId)),
-  deleteUserReview: (userId, movieId) =>
-    dispatch(deleteUserReview(userId, movieId))
+  fetchMovieReviews: movieId => dispatch(fetchMovieReviews(movieId))
 });
 
 export default connect(

@@ -5,6 +5,7 @@ import { SignUpContainer, ButtonsContainer } from './SignUp.styles';
 import Button from '../button/Button.component';
 import { connect } from 'react-redux';
 import { SignUpThroughEmail } from '../../redux/user/user.actions';
+import { validateSignup } from '../../utils/utils';
 
 const SignUp = ({ SignUpThroughEmail }) => {
   const [userCredientials, setUserCredentials] = useState({
@@ -25,17 +26,14 @@ const SignUp = ({ SignUpThroughEmail }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    if (password !== passwordConfirm) {
-      alert('Passwords must match.');
-      return;
+    let isSignupValid = await validateSignup(
+      password,
+      passwordConfirm,
+      displayName
+    );
+    if (isSignupValid) {
+      SignUpThroughEmail(email, password, { displayName });
     }
-
-    if (password.length < 6) {
-      alert('Passwords must be at least 6 characters long.');
-      return;
-    }
-
-    SignUpThroughEmail(email, password, { displayName });
   };
   return (
     <SignUpContainer onSubmit={handleSubmit}>

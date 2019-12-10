@@ -18,6 +18,7 @@ const ReviewForm = ({
   addUserReview,
   updateUserReview,
   userId,
+  posterPath,
   displayName,
   editMode
 }) => {
@@ -56,7 +57,8 @@ const ReviewForm = ({
       movieSummary,
       movieRating,
       userId,
-      displayName
+      displayName,
+      posterPath
     };
     if (editMode) {
       updateUserReview(reviewDetails);

@@ -1,6 +1,7 @@
 import userActionTypes from './user.types';
 import { auth, firestore } from '../../firebase/firebase.utils';
 import { createUserProfileDocument } from './../../firebase/users.utils';
+import { validateSignup } from '../../utils/utils';
 
 export const setCurrentUser = user => ({
   type: userActionTypes.SET_CURRENT_USER,
@@ -67,7 +68,7 @@ export const deleteUserReview = (userId, movieId) => {
       .then(() => {
         dispatch({
           type: 'DELETE_REVIEW',
-          payload: userId
+          payload: { movieId, userId }
         });
         // dispatch({ type: 'DELETE_REVIEW_SUCCESS' });
       })
