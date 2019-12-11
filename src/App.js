@@ -29,6 +29,7 @@ function App({ setCurrentUser, currentUser }) {
   useEffect(() => {
     let unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
+        console.log('Running?');
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot(async snapShot => {
           let favorites = await getUsersFavorites(snapShot.id);

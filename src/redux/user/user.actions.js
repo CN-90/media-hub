@@ -1,33 +1,10 @@
 import userActionTypes from './user.types';
-import { auth, firestore } from '../../firebase/firebase.utils';
-import { createUserProfileDocument } from './../../firebase/users.utils';
-import { validateSignup } from '../../utils/utils';
+import { firestore } from '../../firebase/firebase.utils';
 
 export const setCurrentUser = user => ({
   type: userActionTypes.SET_CURRENT_USER,
   payload: user
 });
-
-export const SignUpThroughEmail = (email, password, additionalData) => {
-  return async dispatch => {
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      await createUserProfileDocument(user, additionalData);
-      dispatch({ type: userActionTypes.SIGN_UP_SUCCESS });
-    } catch (err) {
-      let error = { msg: err.message };
-
-      dispatch({ type: userActionTypes.SIGN_UP_FAIL, payload: error });
-    }
-  };
-};
-
-export const SignInThroughEmail = (email, password, additionalData) => {
-  return async dispatch => {};
-};
 
 export const addUserReview = reviewDetails => {
   const { movieId, userId } = reviewDetails;

@@ -61,19 +61,20 @@ export const filterOutAndAddUpdatedReview = (currentState, newReview) => {
   return newReviews;
 };
 
-// validaes password for sign ups.
+// validaes password & username for sign ups.
 export const validateSignup = async (passwordOne, passwordTwo, displayName) => {
   let userNameExists = await doesUsernameExist(displayName);
+  let validSignUp = {};
+  if (passwordOne !== passwordTwo) {
+    validSignUp.error = 'Passwords do not match.';
+  }
   if (userNameExists) {
-    alert('Username already exists.');
-    return false;
+    validSignUp.error = 'Username already exists.';
+  } else if (displayName === '') {
+    validSignUp.error = 'Username is required.';
+  } else if (displayName.length <= 4) {
+    validSignUp.error = 'Username must be longer than four characters';
   }
-  if (passwordOne.length < 6) {
-    alert('Password must be more than six characters');
-    return false;
-  } else if (passwordOne !== passwordTwo) {
-    alert('Passwords do not match.');
-    return false;
-  }
-  return true;
+
+  return validSignUp;
 };

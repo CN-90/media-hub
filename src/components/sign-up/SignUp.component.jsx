@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import FormInput from './../form-input/Form-input.component';
-import { SignUpContainer, ButtonsContainer } from './SignUp.styles';
+import {
+  SignUpContainer,
+  ButtonsContainer,
+  ErrorContainer
+} from './SignUp.styles';
 import Button from '../button/Button.component';
 import { connect } from 'react-redux';
-import { SignUpThroughEmail } from '../../redux/user/user.actions';
-import { validateSignup } from '../../utils/utils';
+import { SignUpThroughEmail } from '../../redux/auth/auth.actions';
+import ErrorMessage from './../error-message/ErrorMessage.component';
 
-const SignUp = ({ SignUpThroughEmail }) => {
+const SignUp = ({ SignUpThroughEmail, errorMessage }) => {
   const [userCredientials, setUserCredentials] = useState({
     displayName: '',
     email: '',
@@ -26,17 +30,16 @@ const SignUp = ({ SignUpThroughEmail }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    let isSignupValid = await validateSignup(
-      password,
-      passwordConfirm,
-      displayName
-    );
-    if (isSignupValid) {
-      SignUpThroughEmail(email, password, { displayName });
-    }
+    SignUpThroughEmail(email, password, passwordConfirm, { displayName });
   };
   return (
     <SignUpContainer onSubmit={handleSubmit}>
+      {errorMessage ? (
+        <ErrorContainer>
+          <ErrorMessage errorMsg={errorMessage} />
+        </ErrorContainer>
+      ) : null}
+
       <h1>Don't have an account?</h1>
       <p>Sign up with email and password</p>
       <FormInput
@@ -77,9 +80,15 @@ const SignUp = ({ SignUpThroughEmail }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  SignUpThroughEmail: (email, password, additionalData) =>
-    dispatch(SignUpThroughEmail(email, password, additionalData))
+const mapStateToProps = ({ auth }) => ({
+  errorMessage: auth.error
 });
 
-export default connect(null, mapDispatchToProps)(SignUp);
+const mapDispatchToProps = dispatch => ({
+  SignUpThroughEmail: (email, password, passwordConfirm, additionalData) =>
+    dispatch(
+      SignUpThroughEmail(email, password, passwordConfirm, additionalData)
+    )
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

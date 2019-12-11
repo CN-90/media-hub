@@ -68,16 +68,25 @@ export const fetchMovieSearch = (searchTerm, pageNumber) => {
 
 export const fetchMovieReviews = movieId => {
   return async dispatch => {
-    let movieReviews = await firestore.collection(`Movies/${movieId}/reviews`);
-    const reviewsSnapShot = await movieReviews.get();
-    if (!reviewsSnapShot) {
-      return;
-    } else {
-      let reviews = [];
-      reviewsSnapShot.forEach(reviewDoc => {
-        reviews.push(reviewDoc.data());
-      });
-      dispatch({ type: movieActionTypes.SET_MOVIE_REVIEWS, payload: reviews });
+    try {
+      let movieReviews = await firestore.collection(
+        `Movies/${movieId}/reviews`
+      );
+      const reviewsSnapShot = await movieReviews.get();
+      if (!reviewsSnapShot) {
+        return;
+      } else {
+        let reviews = [];
+        reviewsSnapShot.forEach(reviewDoc => {
+          reviews.push(reviewDoc.data());
+        });
+        dispatch({
+          type: movieActionTypes.SET_MOVIE_REVIEWS,
+          payload: reviews
+        });
+      }
+    } catch (err) {
+      dispatch(fetchReviewsFailure(err));
     }
   };
 };
@@ -111,6 +120,11 @@ export const clearMovies = () => ({
 
 export const clearReviews = () => ({
   type: movieActionTypes.CLEAR_REVIEWS
+});
+
+export const fetchReviewsFailure = err => ({
+  type: movieActionTypes.FETCH_REVIEWS_FAIL,
+  payload: err.message
 });
 
 export const setSearchQuery = searchTerm => ({
