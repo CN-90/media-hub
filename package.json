@@ -1,6 +1,9 @@
 {
   "name": "media-hub",
   "version": "0.1.0",
+  "engines": {
+    "node": "12.10.0"
+  },
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
