@@ -31,6 +31,7 @@ export const formatMovieReleaseDate = release_date => {
 
 // Checks whether the current movie is liked by a user.
 export const isCurrentMovieLiked = (currentUser, id) => {
+  if (!currentUser.favorites) return;
   let index = currentUser.favorites.findIndex(movie => movie.id === id);
   return index >= 0;
 };

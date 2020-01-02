@@ -13,22 +13,7 @@ const Sidebar = ({ menuHidden, setMenuHidden, currentUser }) => {
 
       <TextContainer>
         <ul>
-          {!currentUser ? (
-            <Fragment>
-              <SidebarLink
-                setMenuHidden={setMenuHidden}
-                category="signin"
-                pathname="/signin"
-                text="Log in"
-              />
-              <SidebarLink
-                setMenuHidden={setMenuHidden}
-                category="signup"
-                pathname="/signup"
-                text="Sign up"
-              />
-            </Fragment>
-          ) : (
+          {currentUser ? (
             <Fragment>
               <SidebarLink
                 setMenuHidden={setMenuHidden}
@@ -43,6 +28,21 @@ const Sidebar = ({ menuHidden, setMenuHidden, currentUser }) => {
                 text="Reviews"
               />
               <li onClick={() => auth.signOut()}>Sign Out</li>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <SidebarLink
+                setMenuHidden={setMenuHidden}
+                category="signin"
+                pathname="/signin"
+                text="Log in"
+              />
+              <SidebarLink
+                setMenuHidden={setMenuHidden}
+                category="signup"
+                pathname="/signup"
+                text="Sign up"
+              />
             </Fragment>
           )}
           <p className="gold">Movies</p>

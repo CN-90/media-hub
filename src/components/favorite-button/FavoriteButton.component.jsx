@@ -4,7 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
 import { addorRemoveMovieToFavorites } from '../../firebase/users.utils';
 import { withRouter } from 'react-router-dom';
-import { setCurrentUser } from '../../redux/user/user.actions';
+import {
+  setCurrentUser,
+  updateUserFavorites
+} from '../../redux/user/user.actions';
 import { realTimeMovieFavorites } from '../../firebase/users.utils';
 import { isCurrentMovieLiked } from '../../utils/utils';
 
@@ -14,14 +17,15 @@ const FavoriteButton = ({
   history,
   movieId,
   title,
-  poster
+  poster,
+  updateUserFavorites
 }) => {
   const [isLiked, setLiked] = useState(false);
   currentUser = currentUser || false;
 
   useEffect(() => {
     // If user is signed in listen for changes to movie favorites, if change is made update user favorites in redux.
-    if (currentUser.id) {
+    if (currentUser) {
       setLiked(isCurrentMovieLiked(currentUser, movieId));
       let unsubscribeFromFavorites = realTimeMovieFavorites(
         currentUser,
@@ -68,7 +72,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  setCurrentUser: user => dispatch(setCurrentUser(user)),
+  updateUserFavorites: favorites => dispatch(updateUserFavorites(favorites))
 });
 
 export default connect(

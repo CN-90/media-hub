@@ -16,12 +16,7 @@ import {
   createUserProfileDocument,
   getUsersReviews
 } from './firebase/users.utils';
-
-const ErrorPage = () => (
-  <div>
-    <h1 style={{ paddingTop: '200px', marginleft: '200px' }}>Page Not Found</h1>
-  </div>
-);
+import PrivateRoute from './hoc/PrviateRoute';
 
 function App({ setCurrentUser, currentUser }) {
   const [menuHidden, setMenuHidden] = useState(true);
@@ -29,7 +24,6 @@ function App({ setCurrentUser, currentUser }) {
   useEffect(() => {
     let unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
-        console.log('Running?');
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot(async snapShot => {
           let favorites = await getUsersFavorites(snapShot.id);
@@ -83,10 +77,19 @@ function App({ setCurrentUser, currentUser }) {
             path="/movies/search/:movieName?/:pageNumber?"
             component={Movies}
           />
-          <Route exact path="/movies/favorites" component={Favorites} />
-          <Route exact path="/movies/reviews" component={Reviews} />
-
-          <Route component={ErrorPage} />
+          <PrivateRoute
+            exact
+            path="/movies/favorites"
+            component={Favorites}
+            currentUser={currentUser}
+          />
+          <PrivateRoute
+            exact
+            path="/movies/reviews"
+            component={Reviews}
+            currentUser={currentUser}
+          />
+          <Redirect to="/movies/popular/1" />
         </Switch>
       </div>
     </div>

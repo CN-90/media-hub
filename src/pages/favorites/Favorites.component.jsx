@@ -7,7 +7,11 @@ import { Loader } from 'react-loader-spinner';
 const Favorites = ({ currentUser }) => {
   return (
     <div>
-      <PageTitle>My Favorites</PageTitle>
+      <PageTitle>
+        {currentUser.favorites.length
+          ? `Favorites (${currentUser.favorites.length})`
+          : 'Favorites'}
+      </PageTitle>
       <MoviesGrid>
         {currentUser ? (
           currentUser.favorites.map(movie => {

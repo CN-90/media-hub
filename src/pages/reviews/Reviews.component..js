@@ -7,7 +7,11 @@ import { ReviewsContainer } from './../../components/reviews/Reviews.styles';
 const Reviews = ({ currentUser }) => {
   return (
     <div>
-      <PageTitle>Reviews ({currentUser.reviews.length})</PageTitle>
+      <PageTitle>
+        {currentUser.reviews.length
+          ? `Reviews (${currentUser.reviews.length})`
+          : 'Reviews'}
+      </PageTitle>
       <ReviewsContainer>
         {currentUser.reviews.map(review => (
           <Review

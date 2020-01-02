@@ -5,7 +5,8 @@ import {
 } from './../../utils/utils';
 
 const INITIAL_STATE = {
-  currentUser: { favorites: [], id: '', reviews: [] },
+  // currentUser: { favorites: [], id: '', reviews: [] },
+  currentUser: null,
   error: null
 };
 
@@ -57,6 +58,15 @@ const userReducer = (state = INITIAL_STATE, action) => {
             state.currentUser.reviews.slice(),
             action.payload
           )
+        }
+      };
+
+    case userActionTypes.UPDATE_USER_FAVORITES:
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          favorites: action.payload
         }
       };
 

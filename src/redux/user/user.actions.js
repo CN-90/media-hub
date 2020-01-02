@@ -6,6 +6,11 @@ export const setCurrentUser = user => ({
   payload: user
 });
 
+export const updateUserFavorites = favorites => ({
+  type: userActionTypes.UPDATE_USER_FAVORITES,
+  payload: favorites
+});
+
 export const addUserReview = reviewDetails => {
   const { movieId, userId } = reviewDetails;
   return async dispatch => {
