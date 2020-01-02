@@ -3,7 +3,7 @@ import './App.scss';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import SearchBar from './components/search-bar/SearchBar.component';
 import Sidebar from './components/sidebar/Sidebar';
-import Movies from './pages/movies/Movies.component';
+import Movies from './pages/movies/Movies';
 import Movie from './pages/movie/Movie.component';
 import AuthPage from './pages/auth/Auth.component';
 import Favorites from './pages/favorites/Favorites.component';

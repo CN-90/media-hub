@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import MovieCard from '../../components/movie-card/MovieCard.Component';
 import { MoviesPage } from './Movies.styles';
 import Loading from '../../components/loader/Loading.component';
-import Pagination from './../../components/pagination/Pagination.component';
+import Pagination from '../../components/pagination/Pagination.component';
 import { connect } from 'react-redux';
 import {
   fetchMoviesByCategory,
   fetchMovieSearch
 } from '../../redux/movies/movie.actions';
 
-import { getPageTitle } from './../../utils/utils';
-import { PageTitle as MovieCategory, MoviesGrid } from './../../app.styles';
+import { getPageTitle } from '../../utils/utils';
+import { PageTitle as MovieCategory, MoviesGrid } from '../../app.styles';
 
 const Movies = props => {
   const { movies, isFetching, fetchMovieSearch, getMovies } = props;
