@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import MovieCard from '../../components/movie-card/MovieCard.Component';
-import { MoviesPage } from './Movies.styles';
 import Loading from '../../components/loader/Loading.component';
 import Pagination from '../../components/pagination/Pagination.component';
 import { connect } from 'react-redux';
@@ -31,7 +30,7 @@ const Movies = props => {
   return isFetching ? (
     <Loading />
   ) : (
-    <MoviesPage>
+    <div>
       <MovieCategory>{title}</MovieCategory>
       <MoviesGrid>
         {filteredMovies.map(movie => {
@@ -51,7 +50,7 @@ const Movies = props => {
         lastPageNum={movies.totalPages}
         isMovies={movies.results.length}
       />
-    </MoviesPage>
+    </div>
   );
 };
 
